@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     TextView tempVal;
     Spinner spnOpcionDe, spnOpcionA;
     conversores miConversor = new conversores();
+    conversores Pul = new conversores();
     RelativeLayout contenidoView;
 
     //Invocaion de menu
@@ -178,9 +179,89 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Algotritmo Tiempo
+        btnConvertir = findViewById(R.id.btnCalcularTi);
+        btnConvertir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    tempVal = (TextView) findViewById(R.id.txtcantidadTi);
+                    double cantidad = Double.parseDouble(tempVal.getText().toString());
 
+                    spnOpcionDe = findViewById(R.id.cboDeTi);
+                    spnOpcionA = findViewById(R.id.cboATi);
+                    tempVal = findViewById(R.id.lblRespuestaTi);
+                    tempVal.setText("Respuesta: " + miConversor.convertir(4, spnOpcionDe.getSelectedItemPosition(), spnOpcionA.getSelectedItemPosition(), cantidad));
+                }catch (Exception e){
+                    tempVal = findViewById(R.id.lblRespuestaTi);
+                    tempVal.setText("Por favor ingrese los valores correspondiente");
+                    Toast.makeText(getApplicationContext(), "Por ingrese los valores correspondiente "+ e.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
+        //Algoritmo Temperatura
+        btnConvertir = findViewById(R.id.btnCalcularTe);
+        btnConvertir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    tempVal = (TextView) findViewById(R.id.txtcantidadTe);
+                    double cantidad = Double.parseDouble(tempVal.getText().toString());
 
+                    spnOpcionDe = findViewById(R.id.cboDeTe);
+                    spnOpcionA = findViewById(R.id.cboATe);
+                    tempVal = findViewById(R.id.lblRespuestaTe);
+                    tempVal.setText("Respuesta: " + Pul.Temperarura(spnOpcionDe.getSelectedItemPosition(),spnOpcionA.getSelectedItemPosition(),cantidad ));
+                }catch (Exception e){
+                    tempVal = findViewById(R.id.lblRespuestaTe);
+                    tempVal.setText("Por favor ingrese los valores correspondiente");
+                    Toast.makeText(getApplicationContext(), "Por ingrese los valores correspondiente "+ e.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        //Algoritmo Volumen
+        btnConvertir = findViewById(R.id.btnCalcularVo);
+        btnConvertir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    tempVal = (TextView) findViewById(R.id.txtcantidadVo);
+                    double cantidad = Double.parseDouble(tempVal.getText().toString());
+
+                    spnOpcionDe = findViewById(R.id.cboDeVo);
+                    spnOpcionA = findViewById(R.id.cboAVo);
+                    tempVal = findViewById(R.id.lblRespuestaVo);
+                    tempVal.setText("Respuesta: " + miConversor.convertir(6, spnOpcionDe.getSelectedItemPosition(), spnOpcionA.getSelectedItemPosition(), cantidad));
+                }catch (Exception e){
+                    tempVal = findViewById(R.id.lblRespuestaVo);
+                    tempVal.setText("Por favor ingrese los valores correspondiente");
+                    Toast.makeText(getApplicationContext(), "Por ingrese los valores correspondiente "+ e.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        //Algoritmo Area
+        btnConvertir = findViewById(R.id.btnCalcularAr);
+        btnConvertir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    tempVal = (TextView) findViewById(R.id.txtcantidadAr);
+                    double cantidad = Double.parseDouble(tempVal.getText().toString());
+
+                    spnOpcionDe = findViewById(R.id.cboDeAr);
+                    spnOpcionA = findViewById(R.id.cboAAr);
+                    tempVal = findViewById(R.id.lblRespuestaAr);
+                    tempVal.setText("Respuesta: " + miConversor.convertir(7, spnOpcionDe.getSelectedItemPosition(), spnOpcionA.getSelectedItemPosition(), cantidad));
+                }catch (Exception e){
+                    tempVal = findViewById(R.id.lblRespuestaAr);
+                    tempVal.setText("Por favor ingrese los valores correspondiente");
+                    Toast.makeText(getApplicationContext(), "Por ingrese los valores correspondiente "+ e.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
     }
 
@@ -195,16 +276,48 @@ class conversores{
             {1.0,16.00,0.453592,4.535924,453.5924,45.35924,4535.924,45359.24,453592.4,0.0005},/*Masa*/
             {1.0,0.68,7.629395,8.0,976.5625,0.953674,0.008,0.001,0.000008,0.000001},/*Almacenamiento*/
             {1.0,60.0,3600.0,3600000.0,3600000000.0,0.041667,0.005952,0.000114,1.14155e-5,1.14155e-6},/*Tiempo*/
-            {1.0,-17.22222,255.9278},/*Temperatura*/
+            {1.0,33.8,274.15},/*Temperatura*/
             {1.0,0.333333,0.166667,0.0200833,0.005208,0.001302,0.004929,4.928922,4.928922,0.000005},/*Volumen*/
             {1.0,0.111111,0.000000035870064,144.0,0.00000009290304,0.000009,0.092903,929.0304,92903.04,0.000024},/*Area*/
     };
+
     public double convertir(int opcion, int de, int a, double cantidad){
         return conversor[opcion][a] / conversor[opcion][de] * cantidad;
     }
+
+    public double Temperarura(  int de, double temp, double cantidad){
+
+
+        if (  de == 0) {
+
+                temp = (cantidad * 9 / 5) + 32;
+
+        }
+
+        if ( de == 1) {
+            temp = (cantidad - 32) * 5 / 9;
+        }
+
+        if ( de == 2) {
+            temp = (cantidad - 2.73);
+        }
+
+
+
+
+        return temp;
+    }
+/* Celcius - Farenheit = (1*9/5)+32
+   Celcius - Kelvin =   1  + 273.15
+
+   F - C = (1 °F − 32) × 5/9
+   F - K = (1 °F − 32) × 5/9 + 273.15
+
+   K - C = 1 K − 273.15
+   K - F = (1 K − 273.15) × 9/5 + 32
+
+
+ */
+
+
 }
-
-
-
-
-
