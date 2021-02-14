@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     TabHost tbhConversores;
     Button btnConvertir;
     TextView tempVal;
+    double tempval;
     Spinner spnOpcionDe, spnOpcionA;
     conversores miConversor = new conversores();
     conversores Pul = new conversores();
@@ -212,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
                     spnOpcionDe = findViewById(R.id.cboDeTe);
                     spnOpcionA = findViewById(R.id.cboATe);
                     tempVal = findViewById(R.id.lblRespuestaTe);
-                    tempVal.setText("Respuesta: " + Pul.Temperarura(spnOpcionDe.getSelectedItemPosition(),spnOpcionA.getSelectedItemPosition(),cantidad ));
+                    tempVal.setText("Respuesta: " + Pul.Temperarura(spnOpcionDe.getSelectedItemPosition(),spnOpcionA.getSelectedItemPosition(), tempval ,cantidad ));
                 }catch (Exception e){
                     tempVal = findViewById(R.id.lblRespuestaTe);
                     tempVal.setText("Por favor ingrese los valores correspondiente");
@@ -285,25 +286,34 @@ class conversores{
         return conversor[opcion][a] / conversor[opcion][de] * cantidad;
     }
 
-    public double Temperarura(  int de, double temp, double cantidad){
+    public double Temperarura(  int de, int a, double temp, double cantidad){
 
 
-        if (  de == 0) {
+        if (  de == 0 && a == 1 ) {
 
                 temp = (cantidad * 9 / 5) + 32;
 
         }
 
-        if ( de == 1) {
+        if ( de == 0 && a == 2) {
+            temp = (cantidad + 273.15);
+        }
+
+        if ( de == 1 && a == 0) {
             temp = (cantidad - 32) * 5 / 9;
         }
 
-        if ( de == 2) {
-            temp = (cantidad - 2.73);
+        if ( de == 1 && a == 2) {
+            temp = ( cantidad - 32) * 5 / 9 + 273.15;
         }
 
+        if ( de == 2 && a == 0){
+            temp = ( cantidad - 273.15);
+        }
 
-
+        if ( de == 2 && a == 1) {
+            temp = ( cantidad - 273.15) * 9 / 5 + 32;
+        }
 
         return temp;
     }
