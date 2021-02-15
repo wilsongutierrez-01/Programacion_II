@@ -326,6 +326,10 @@ class conversores{
    K - C = 1 K − 273.15
    K - F = (1 K − 273.15) × 9/5 + 32
 
+   Cristian Alexander Alemán Rodriguez
+   Wilson Adolfo Gutierrez Jovel
+   Jose Pedro Cerna Serrano
+
 
  */
 
