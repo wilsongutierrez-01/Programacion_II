@@ -96,10 +96,18 @@ public class MainActivity extends AppCompatActivity {
     }
 //for Pe
     public  double Cuouta(double m3, double precio){
+        double exc1 = 18;
+        double val1 = 0.45;
+        double cumi = 6.00;
 
         if ( m3 >= 1 && m3 <= 18){
-            precio = 6.00;
+            precio = cumi;
        }
+
+        if (m3 >= 19 && m3 <= 28){
+            precio = ((m3 - exc1) * val1 ) + cumi;
+        }
+
         return precio;
     }
 }
