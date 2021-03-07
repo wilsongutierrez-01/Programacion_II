@@ -38,6 +38,30 @@
                         android:layout_marginLeft="30dp"
                         android:textSize="35dp"/>
 
+                    <EditText
+                        android:id="@+id/txtcant"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/m3"
+                        android:layout_marginTop="100dp"
+                        android:hint="Cantidad" />
+                    <TextView
+                        android:id="@+id/lblResultado"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtcant"
+                        android:layout_marginTop="10dp"
+                        android:text="Respuesta: ?" />
+                    <Button
+                        android:id="@+id/btnPrecio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/lblResultado"
+                        android:layout_marginTop="30dp"
+                        android:text="Precio" />
+
+
+
 
                 </RelativeLayout>
                 <RelativeLayout
