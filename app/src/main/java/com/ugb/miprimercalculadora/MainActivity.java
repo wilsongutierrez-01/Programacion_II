@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
             return conversor[opcion][a] / conversor[opcion][de] * cantidad;
         }
     }
-
+//for Pe
     public  double Cuouta(double m3, double precio){
 
         if ( m3 >= 1 && m3 <= 18){
