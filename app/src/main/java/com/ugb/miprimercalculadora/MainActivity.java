@@ -90,12 +90,16 @@ public class MainActivity extends AppCompatActivity {
 
         };
         public double convertir(int opcion, int de, int a, double cantidad){
+
             return conversor[opcion][a] / conversor[opcion][de] * cantidad;
         }
     }
 
     public  double Cuouta(double m3, double precio){
 
+        if ( m3 >= 1 && m3 <= 18){
+            precio = 6.00;
+       }
         return precio;
     }
 }
