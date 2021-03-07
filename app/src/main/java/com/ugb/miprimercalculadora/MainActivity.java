@@ -93,5 +93,10 @@ public class MainActivity extends AppCompatActivity {
             return conversor[opcion][a] / conversor[opcion][de] * cantidad;
         }
     }
+
+    public  double Cuouta(double m3, double precio){
+
+        return precio;
+    }
 }
 
