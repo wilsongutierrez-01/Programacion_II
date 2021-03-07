@@ -34,37 +34,14 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(),"Index: "+ item, Toast.LENGTH_LONG).show();
         int idMenu = item.getItemId();
         switch (idMenu){
-            case R.id.mnxMoneda:
+            case R.id.mnxConversor:
                 tbhConversores.setCurrentTab(0);
                 break;
 
-            case R.id.mnxLongitud:
+            case R.id.mnxCuota:
                 tbhConversores.setCurrentTab(1);
                 break;
 
-            case R.id.mnxMasa:
-                tbhConversores.setCurrentTab(2);
-                break;
-
-            case R.id.mnxAlmacenamiento:
-                tbhConversores.setCurrentTab(3);
-                break;
-
-            case R.id.mnxTiempo:
-                tbhConversores.setCurrentTab(4);
-                break;
-
-            case R.id.mnxTemperatura:
-                tbhConversores.setCurrentTab(5);
-                break;
-
-            case R.id.mnxVolumen:
-                tbhConversores.setCurrentTab(6);
-                break;
-
-            case R.id.mnxArea:
-                tbhConversores.setCurrentTab(7);
-                break;
 
         }
         return super.onOptionsItemSelected(item);
