@@ -22,66 +22,39 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
+
+
             <FrameLayout
                 android:id="@android:id/tabcontent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <RelativeLayout
-                    android:id="@+id/tabLongitud"
+                    android:id="@+id/tabCouta"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="10dp"
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/lblDeL"
-                        android:text="DE:"
+                        android:id="@+id/lblTitulo"
+                        android:text="Cuota a pagar de agua"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <Spinner
-                        android:id="@+id/cboDeL"
-                        android:entries="@array/conversorLongitud"
-                        android:layout_marginLeft="40dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="30dp"
+                        android:textSize="35dp"/>
 
                     <TextView
-                        android:id="@+id/lblAL"
-                        android:text="A:"
-                        android:layout_below="@id/lblDeL"
-                        android:layout_marginTop="40dp"
+                        android:id="@+id/lbl2"
+                        android:text="Cuota a pagar de agua"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <Spinner
-                        android:id="@+id/cboAL"
-                        android:layout_below="@id/cboDeL"
-                        android:layout_marginTop="40dp"
-                        android:entries="@array/conversorLongitud"
-                        android:layout_marginLeft="40dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-                    <EditText
-                        android:id="@+id/txtCantidadL"
-                        android:layout_below="@id/lblAL"
-                        android:layout_marginTop="40dp"
-                        android:hint="Cantidad"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-                    <TextView
-                        android:id="@+id/lblRespuestaL"
-                        android:layout_below="@id/txtCantidadL"
-                        android:text="Respuesta: ?"
-                        android:layout_marginTop="40dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-                    <Button
-                        android:id="@+id/btnCalcularL"
-                        android:layout_below="@id/lblRespuestaL"
-                        android:layout_marginTop="40dp"
-                        android:text="Convertir"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="60dp"
+                        android:layout_marginLeft="30dp"
+                        android:textSize="35dp"/>
+
+
 
 
 
