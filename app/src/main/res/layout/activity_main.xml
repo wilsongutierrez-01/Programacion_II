@@ -6,36 +6,29 @@
     android:layout_height="match_parent"
     android:id="@+id/contenidoView"
     tools:context=".MainActivity">
-
     <TabHost
         android:id="@+id/tbhConversores"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
             <TabWidget
                 android:id="@android:id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-
-
             <FrameLayout
                 android:id="@android:id/tabcontent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
                 <RelativeLayout
                     android:id="@+id/tabCouta"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="10dp"
                     android:orientation="vertical">
-
                     <TextView
                         android:id="@+id/lblTitulo"
                         android:text="Cuota a pagar de agua"
@@ -45,41 +38,25 @@
                         android:layout_marginLeft="30dp"
                         android:textSize="35dp"/>
 
-                    <TextView
-                        android:id="@+id/lbl2"
-                        android:text="Cuota a pagar de agua"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="60dp"
-                        android:layout_marginLeft="30dp"
-                        android:textSize="35dp"/>
-
-
-
-
 
                 </RelativeLayout>
-
                 <RelativeLayout
-                    android:id="@+id/tabMonedas"
+                    android:id="@+id/tabConversor"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="10dp"
                     android:orientation="vertical">
-
                     <TextView
                         android:id="@+id/lblDe"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="DE: " />
-
                     <Spinner
                         android:id="@+id/cboDe"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="40dp"
-                        android:entries="@array/conversorMonedas" />
-
+                        android:entries="@array/conversorArea" />
                     <TextView
                         android:id="@+id/lblA"
                         android:layout_width="wrap_content"
@@ -87,7 +64,6 @@
                         android:layout_below="@id/cboDe"
                         android:layout_marginTop="20dp"
                         android:text="A: " />
-
                     <Spinner
                         android:id="@+id/cboA"
                         android:layout_width="match_parent"
@@ -95,8 +71,7 @@
                         android:layout_below="@id/cboDe"
                         android:layout_marginLeft="40dp"
                         android:layout_marginTop="20dp"
-                        android:entries="@array/conversorMonedas" />
-
+                        android:entries="@array/conversorArea" />
                     <EditText
                         android:id="@+id/txtcantidad"
                         android:layout_width="match_parent"
@@ -104,7 +79,6 @@
                         android:layout_below="@id/cboA"
                         android:layout_marginTop="20dp"
                         android:hint="Cantidad" />
-
                     <TextView
                         android:id="@+id/lblRespuesta"
                         android:layout_width="match_parent"
@@ -112,7 +86,6 @@
                         android:layout_below="@id/txtcantidad"
                         android:layout_marginTop="20dp"
                         android:text="Respuesta: ?" />
-
                     <Button
                         android:id="@+id/btnCalcular"
                         android:layout_width="match_parent"
@@ -120,14 +93,9 @@
                         android:layout_below="@id/lblRespuesta"
                         android:layout_marginTop="20dp"
                         android:text="Calcular" />
-
                 </RelativeLayout>
 
-
-
             </FrameLayout>
-
         </LinearLayout>
     </TabHost>
-
 </RelativeLayout>
