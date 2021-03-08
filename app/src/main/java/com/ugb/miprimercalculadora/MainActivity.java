@@ -19,7 +19,9 @@ public class MainActivity extends AppCompatActivity {
     TabHost tbhConversores;
     RelativeLayout contenidoView;
     conversores miConversor = new conversores();
+    Precios misprecios = new Precios();
     Button btnConvertir;
+    Button btnprecio;
     TextView tempVal;
     double tempval;
     Spinner spnOpcionDe, spnOpcionA;
@@ -82,6 +84,23 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        btnprecio = findViewById(R.id.btnPrecio);
+        btnprecio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    tempVal = (TextView) findViewById(R.id.txtcant);
+                    double metro = Double.parseDouble(tempVal.getText().toString());
+                    tempVal.setText("Su total a pagar: " + misprecios.Cuouta(metro, tempval));
+                }catch (Exception e){
+                    tempVal = findViewById(R.id.lblResultado);
+                    Toast.makeText(getApplicationContext(), "Verifique sus  datos ingresados" + e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });
+
+
 
     }
     class conversores {
@@ -95,20 +114,22 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 //for Pe
-    public  double Cuouta(double m3, double precio){
+    class Precios {
+    public double Cuouta(double m3, double precio) {
         double exc1 = 18;
         double val1 = 0.45;
         double cumi = 6.00;
 
-        if ( m3 >= 1 && m3 <= 18){
+        if (m3 >= 1 && m3 <= 18) {
             precio = cumi;
-       }
+        }
 
-        if (m3 >= 19 && m3 <= 28){
-            precio = ((m3 - exc1) * val1 ) + cumi;
+        if (m3 >= 19 && m3 <= 28) {
+            precio = ((m3 - exc1) * val1) + cumi;
         }
 
         return precio;
     }
+}
 }
 
