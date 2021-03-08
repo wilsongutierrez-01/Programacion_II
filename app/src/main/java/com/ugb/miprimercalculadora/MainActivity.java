@@ -55,14 +55,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        //Tabhost
+        //TabhostFinalizado
 
         contenidoView = findViewById(R.id.contenidoView);
         tbhConversores = findViewById(R.id.tbhConversores);
         tbhConversores.setup();
 
-        tbhConversores.addTab(tbhConversores.newTabSpec("Coversor").setContent(R.id.tabConversor).setIndicator("", getResources().getDrawable(R.drawable.xdmonedas)));
-        tbhConversores.addTab(tbhConversores.newTabSpec("Cuota").setContent(R.id.tabCouta).setIndicator("", getResources().getDrawable(R.drawable.xdlongitud)));
+        tbhConversores.addTab(tbhConversores.newTabSpec("Coversor").setContent(R.id.tabConversor).setIndicator("", getResources().getDrawable(R.drawable.xdarea)));
+        tbhConversores.addTab(tbhConversores.newTabSpec("Cuota").setContent(R.id.tabCouta).setIndicator("", getResources().getDrawable(R.drawable.ic_grifo_de_agua)));
 
         btnConvertir = findViewById(R.id.btnCalcular);
         btnConvertir.setOnClickListener(new View.OnClickListener() {
@@ -116,9 +116,10 @@ public class MainActivity extends AppCompatActivity {
 //for Pe
     class Precios {
     public double Cuouta(double m3, double precio) {
-        double exc1 = 18;
-        double val1 = 0.45;
+        double exc1 = 18 , exc2 = 28;
+        double val1 = 0.45, val2 = 0.65;
         double cumi = 6.00;
+        double valexc1 = 4.50;
 
         if (m3 >= 1 && m3 <= 18) {
             precio = cumi;
@@ -127,6 +128,11 @@ public class MainActivity extends AppCompatActivity {
         if (m3 >= 19 && m3 <= 28) {
             precio = ((m3 - exc1) * val1) + cumi;
         }
+
+        if ( m3 >= 29){
+            precio = ((m3 - exc2) * val2) + valexc1 + cumi;
+        }
+
 
         return precio;
     }
