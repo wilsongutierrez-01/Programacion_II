@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
     }
     class conversores {
         double[][] conversor = {
-                {1.0, 0.111111, 0.000000035870064, 144.0, 0.00000009290304, 0.000009, 0.092903, 929.0304, 92903.04, 0.000024},/*Area*/
+                {1, 10.7639, 1.431, 1.19599, 0.0015903307888, 0.0001434,0.0001},/*Iniciamos con Metros Cuadrados*/
 
         };
         public double convertir(int opcion, int de, int a, double cantidad){
