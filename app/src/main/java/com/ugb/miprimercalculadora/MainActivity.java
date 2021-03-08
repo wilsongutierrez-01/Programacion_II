@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        //Tabhost
+        //TabhostFinalizado
 
         contenidoView = findViewById(R.id.contenidoView);
         tbhConversores = findViewById(R.id.tbhConversores);
