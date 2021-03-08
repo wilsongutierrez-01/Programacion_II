@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
             return conversor[opcion][a] / conversor[opcion][de] * cantidad;
         }
     }
-//for Pe
+//Algoritmos para agua
     class Precios {
     public double Cuouta(double m3, double precio) {
         double exc1 = 18 , exc2 = 28;
