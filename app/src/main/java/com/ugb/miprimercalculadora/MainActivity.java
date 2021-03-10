@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     tempVal = (TextView) findViewById(R.id.txtcant);
                     double metro = Double.parseDouble(tempVal.getText().toString());
+                    tempVal = findViewById(R.id.lblResultado);
                     tempVal.setText("Su total a pagar: " + misprecios.Cuouta(metro, tempval));
                 }catch (Exception e){
                     tempVal = findViewById(R.id.lblResultado);
