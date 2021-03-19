@@ -40,6 +40,11 @@ public class activity_agregar_productos extends AppCompatActivity {
             mostrarVistaPrincipal();
         });
 
+        imgFotoProducto = findViewById(R.id.imgFotoProducto);
+        imgFotoProducto.setOnClickListener(v -> {
+            tomarFotoProducto();
+        });
+
     }
 
     //Tomar foto producto
