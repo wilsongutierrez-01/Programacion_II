@@ -1,9 +1,5 @@
 package com.ugb.miprimercalculadora;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.FileProvider;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,27 +12,30 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class activity_agregar_productos extends AppCompatActivity {
+public class agregarProducto extends AppCompatActivity {
     FloatingActionButton btnAtras;
     ImageView imgFotoProducto;
     Intent tomarFotoIntent;
-    String urlCompletaImg, idProducto,accion="nuevo";
-    Button btn;
-    TextView tempVal;
+    String urlCompletaImg;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agregar_productos);
 
-        btn = findViewById(R.id.btnAtras);
-        btn.setOnClickListener(v -> {
+        btnAtras = findViewById(R.id.btnAtras);
+        btnAtras.setOnClickListener(v -> {
             mostrarVistaPrincipal();
         });
 
@@ -46,7 +45,6 @@ public class activity_agregar_productos extends AppCompatActivity {
         });
 
     }
-
     //Tomar foto producto
 
     private void tomarFotoProducto(){
@@ -62,20 +60,19 @@ public class activity_agregar_productos extends AppCompatActivity {
 
             if ( photoProducto !=null){
                 try {
-                    Uri uriPhotoProducto = FileProvider.getUriForFile(activity_agregar_productos.this, "com.ugb.miprimercalculadora.fileprovider", photoProducto);
+                    Uri uriPhotoProducto = FileProvider.getUriForFile(agregarProducto.this, "com.ugb.miprimercalculadora.fileprovider", photoProducto);
                     tomarFotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriPhotoProducto);
                     startActivityForResult(tomarFotoIntent, 1);
 
                 }catch ( Exception e){
                     mostrarMsgToast(e.getMessage());
                 }
+
+            }else {
+                mostrarMsgToast("No fue posible tomar la foto");
+
             }
-
-
-        }else {
-            mostrarMsgToast("No fue posible tomar la foto");
         }
-
     }
 
     //Mostrar principal
@@ -88,6 +85,8 @@ public class activity_agregar_productos extends AppCompatActivity {
     private void mostrarMsgToast(String msg){
         Toast.makeText(getApplicationContext(),msg, Toast.LENGTH_LONG).show();
     }
+
+
     //Crear Producto
 
     private File crearImagenProducto () throws Exception{
@@ -101,6 +100,9 @@ public class activity_agregar_productos extends AppCompatActivity {
         urlCompletaImg = image.getAbsolutePath();
         return image;
     }
+
+
+
 
     //Activity Result
     @Override
@@ -117,6 +119,12 @@ public class activity_agregar_productos extends AppCompatActivity {
             mostrarMsgToast(e.getMessage());
         }
     }
+
+
+
+
+
+
 
 
 }

@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     FloatingActionButton btn;
-    ListView ltsProductos;
+    Intent nuevoProducto;
 
 
     @Override
@@ -42,9 +42,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void agregarProductos(){
-        Intent agregarProductos = new Intent(getApplicationContext(), activity_agregar_productos.class);
-        startActivity(agregarProductos);
+        try {
+            nuevoProducto = new Intent(getApplicationContext(), agregarProducto.class);
+            startActivity(nuevoProducto);
 
+        }catch (Exception e){
+          mostrarMsgToast("Este es el error mensos");
+        }
+
+    }
+
+    //Mensaje Toast
+    private void mostrarMsgToast(String msg){
+        Toast.makeText(getApplicationContext(),msg, Toast.LENGTH_LONG).show();
     }
 
 
