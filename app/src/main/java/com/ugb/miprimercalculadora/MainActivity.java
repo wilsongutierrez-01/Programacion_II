@@ -71,17 +71,19 @@ class productos{
     String producto;
     String marca;
     String descripcion;
+    String presentacion;
     String precio;
     String urlImg;
 
 
 
-    public productos(String idProducto, String codigo, String producto, String  marca, String descripcion, String precio, String urlImg) {
+    public productos(String idProducto, String codigo, String producto, String  marca, String descripcion, String precio, String presentacion, String urlImg) {
         this.idProducto = idProducto;
         this.codigo = codigo;
         this.producto = producto;
         this.marca = marca;
         this.descripcion = descripcion;
+        this.presentacion = presentacion;
         this.precio = precio;
         this.urlImg = urlImg;
     }
@@ -131,6 +133,10 @@ class productos{
     public void setUrlImg(String urlImg) {
         this.urlImg = urlImg;
     }
+
+    public String getPresentacion(){return presentacion;}
+
+    public void setPresentacion (){this.presentacion = presentacion;}
 
 
 }
