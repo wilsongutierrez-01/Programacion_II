@@ -25,6 +25,12 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     FloatingActionButton btn;
     Intent nuevoProducto;
+    ListView ltsAmigos;
+    Cursor datosAmigosCursor = null;
+    ArrayList<productos> amigosArrayList=new ArrayList<productos>();
+    ArrayList<productos> amigosArrayListCopy=new ArrayList<productos>();
+    productos misProductos;
+
 
 
     @Override
@@ -55,6 +61,75 @@ public class MainActivity extends AppCompatActivity {
     //Mensaje Toast
     private void mostrarMsgToast(String msg){
         Toast.makeText(getApplicationContext(),msg, Toast.LENGTH_LONG).show();
+    }
+
+
+}
+class productos{
+    String idProducto;
+    String codigo;
+    String producto;
+    String marca;
+    String descripcion;
+    String precio;
+    String urlImg;
+
+
+
+    public productos(String idProducto, String codigo, String producto, String  marca, String descripcion, String precio, String urlImg) {
+        this.idProducto = idProducto;
+        this.codigo = codigo;
+        this.producto = producto;
+        this.marca = marca;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.urlImg = urlImg;
+    }
+
+    public String getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(String idProducto) {
+        this.idProducto = idProducto;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getProducto() {
+        return producto;
+    }
+
+    public void setProducto(String producto) {
+        this.producto = producto;
+    }
+
+    public String getMarca() {return marca;}
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public String getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(String precio) {
+        this.precio = precio;
+    }
+
+    public String getUrlImg() {
+        return urlImg;
+    }
+
+    public void setUrlImg(String urlImg) {
+        this.urlImg = urlImg;
     }
 
 
