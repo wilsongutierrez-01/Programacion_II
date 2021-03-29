@@ -4,10 +4,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
 public class DB extends SQLiteOpenHelper {
+    Context miContext;
     static String nombreDB = "db_amigos";
     static String tblProducto = "CREATE TABLE tblproductos(idProducto integer primary key autoincrement, producto text, codigo text, marca text, descripcion text, presentacion text, preio text, urlPhoto text)";
 
@@ -37,34 +39,38 @@ public class DB extends SQLiteOpenHelper {
     }
 
     public Cursor admin_productos (String accion, String [] datos ) {
-        Cursor datosCursor = null;
-        SQLiteDatabase sqLiteDatabaseW = getWritableDatabase();
-        SQLiteDatabase sqLiteDataBaseR =getReadableDatabase();
-        switch (accion){
-            case "consultar":
-                datosCursor = sqLiteDataBaseR.rawQuery("select * from tblproductos order by nombre", null);
-                break;
+       try{
+           Cursor datosCursor = null;
+           SQLiteDatabase sqLiteDatabaseW = getWritableDatabase();
+           SQLiteDatabase sqLiteDataBaseR =getReadableDatabase();
+           switch (accion){
+               case "consultar":
+                   datosCursor = sqLiteDataBaseR.rawQuery("select * from tblproductos order by nombre", null);
+                   break;
 
-            case "nuevo":
-                sqLiteDatabaseW.execSQL("INSERT INTO tblproductos(producto, codigo, marca, descripcion, presentacion, precio, urlPhoto) VALUES ('"+datos[1]+"', '"+datos[2]+"', '"+datos[3]+"', '"+datos[4]+"', " +
-                                                                                                                                                                "'"+datos[5]+"', '"+datos[6]+"', '"+datos[7]+"')");
-                break;
+               case "nuevo":
+                   sqLiteDatabaseW.execSQL("INSERT INTO tblproductos(producto, codigo, marca, descripcion, presentacion, precio, urlPhoto) VALUES ('"+datos[1]+"', '"+datos[2]+"', '"+datos[3]+"', '"+datos[4]+"', " +
+                           "'"+datos[5]+"', '"+datos[6]+"', '"+datos[7]+"')");
+                   break;
 
-            case "modificar":
-                sqLiteDatabaseW.execSQL("UPDATE tblproductos SET producto ='"+datos[1]+"', codigo='"+datos[2]+"', marca = '"+datos[3]+"', descripcion = '"+datos[4]+"', " +
-                                                                                                                "presentacion = '"+datos[5]+"', precio = '"+datos[6]+"', urlPhoto = '"+datos[7]+"'");
+               case "modificar":
+                   sqLiteDatabaseW.execSQL("UPDATE tblproductos SET producto ='"+datos[1]+"', codigo='"+datos[2]+"', marca = '"+datos[3]+"', descripcion = '"+datos[4]+"', " +
+                           "presentacion = '"+datos[5]+"', precio = '"+datos[6]+"', urlPhoto = '"+datos[7]+"'");
 
-            case "eliminar":
-                sqLiteDatabaseW.execSQL("DELETE FROM tblproductos WHERE idProducto = '"+datos[0]+"'");
+               case "eliminar":
+                   sqLiteDatabaseW.execSQL("DELETE FROM tblproductos WHERE idProducto = '"+datos[0]+"'");
 
-        }
+           }
 
 
-        return datosCursor;
+           return datosCursor;
 
+       }catch (Exception e){
+           Toast.makeText(miContext, "Error en DB"+ e.getMessage(), Toast.LENGTH_SHORT).show();
+           return null;
+
+       }
 
     }
-
-
 
 }
