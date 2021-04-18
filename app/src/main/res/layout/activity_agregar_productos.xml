@@ -6,73 +6,94 @@
     android:layout_height="match_parent"
     tools:context=".agregarProducto">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cvrPhoto"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        app:cardCornerRadius="150dp">
-    <ImageButton
-        android:id="@+id/imgFotoProducto"
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"/>
-    </androidx.cardview.widget.CardView>
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/txtCodigo"
-        android:layout_below="@id/cvrPhoto"
-        android:layout_margin="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Codigo"/>
-    <EditText
-        android:id="@+id/txtNombreProducto"
-        android:layout_below="@id/txtCodigo"
-        android:layout_margin="10dp"
-        android:hint="Producto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <EditText
-        android:id="@+id/txtMarca"
-        android:layout_below="@id/txtNombreProducto"
-        android:layout_margin="10dp"
-        android:hint="Marca"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/txtPresentacion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Presentacion"
-        android:layout_margin="10dp"
-        android:layout_below="@+id/txtMarca"/>
-    <EditText
-        android:id="@+id/txtDescripcion"
-        android:layout_below="@id/txtPresentacion"
-        android:layout_margin="10dp"
-        android:hint="Descripcion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvrPhoto"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="150dp">
+                <ImageButton
+                    android:id="@+id/imgFotoProducto"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"/>
+            </androidx.cardview.widget.CardView>
 
-    <EditText
-        android:id="@+id/txtPrecio"
-        android:layout_below="@id/txtDescripcion"
-        android:layout_margin="10dp"
-        android:hint="Precio"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <Button
-        android:id="@+id/btnGuardarProducto"
-        android:layout_below="@id/txtPrecio"
-        android:layout_margin="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Guardar Producto"
-        android:layout_marginLeft="100dp"
-        android:layout_marginRight="100dp"/>
+            <EditText
+                android:id="@+id/txtCodigo"
+                android:layout_below="@id/cvrPhoto"
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Codigo"/>
+            <EditText
+                android:id="@+id/txtNombreProducto"
+                android:layout_below="@id/txtCodigo"
+                android:layout_margin="10dp"
+                android:hint="Producto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <EditText
+                android:id="@+id/txtMarca"
+                android:layout_below="@id/txtNombreProducto"
+                android:layout_margin="10dp"
+                android:hint="Marca"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <EditText
+                android:id="@+id/txtPresentacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Presentacion"
+                android:layout_margin="10dp"
+                android:layout_below="@+id/txtMarca"/>
+
+            <EditText
+                android:id="@+id/txtDescripcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtPrecio"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:hint="Descripcion" />
+
+            <EditText
+                android:id="@+id/txtPrecio"
+                android:layout_below="@id/btnGuardarProducto"
+                android:layout_margin="10dp"
+                android:hint="Precio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/btnGuardarProducto"
+                android:layout_below="@id/txtPresentacion"
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Guardar Producto"
+                android:layout_marginLeft="100dp"
+                android:layout_marginRight="100dp"/>
+
+
+        </LinearLayout>
+    </ScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAtras"
@@ -82,5 +103,6 @@
         android:layout_alignParentRight="true"
         android:layout_margin="20dp"
         android:src="@drawable/abc_vector_test" />
+
 
 </RelativeLayout>

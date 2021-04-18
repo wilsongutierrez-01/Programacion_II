@@ -26,7 +26,7 @@ public class agregarProducto extends AppCompatActivity {
     FloatingActionButton btnAtras;
     ImageView imgFotoProducto;
     Intent tomarFotoIntent;
-    String urlCompletaImg, idProdcuto, accion="nuevo";
+    String urlPhoto, idProdcuto, accion="nuevo";
     Button btn;
     DB miDB;
     TextView tempVal;
@@ -52,6 +52,16 @@ public class agregarProducto extends AppCompatActivity {
 
         btn = findViewById(R.id.btnGuardarProducto);
         btn.setOnClickListener(v->{
+            agregarProducto();
+            mostrarVistaPrincipal();
+
+        });
+        mostrarDatosProductos();
+    }
+    //agregar producto
+    private void agregarProducto () {
+        try {
+
             tempVal = findViewById(R.id.txtCodigo);
             String codigo = tempVal.getText().toString();
 
@@ -70,14 +80,16 @@ public class agregarProducto extends AppCompatActivity {
             tempVal = findViewById(R.id.txtPrecio);
             String precio = tempVal.getText().toString();
 
-            String[] datos = {idProdcuto,codigo,producto,marca,descripcion,presentacion,precio,urlCompletaImg};
+            String [] datos = {idProdcuto,codigo,producto,marca,descripcion,presentacion,precio,urlPhoto};
             miDB.admin_productos(accion,datos);
-            mostrarMsgToast("Registro guardado con exito.");
-
+            mostrarMsgToast("Producto guardado con exito");
             mostrarVistaPrincipal();
-        });
-        mostrarDatosProductos();
+            mostrarDatosProductos();
 
+
+        }catch (Exception e){
+            mostrarMsgToast(e.getMessage() + "aqui hay error");
+        }
 
     }
     //Tomar foto producto
@@ -109,41 +121,45 @@ public class agregarProducto extends AppCompatActivity {
             }
         }
     }
+    /*this.idProducto = idProducto;
+   this.codigo = codigo;
+   this.producto = producto;
+   this.marca = marca;
+   this.descripcion = descripcion;
+   this.presentacion = presentacion;
+   this.precio = precio;
+   this.urlImg = urlImg*/
     //Mostras datos productos
     private void mostrarDatosProductos() {
-        try{
-            Bundle recibirParametros = getIntent().getExtras();
-            accion = recibirParametros.getString("accion");
-            if(accion.equals("modificar")){
-                String[] datos = recibirParametros.getStringArray("datos");
-
+        try {
+            Bundle parametros= getIntent().getExtras();
+            accion = parametros.getString("accion");
+            if (accion.equals("modificar")){
+                String[] datos = parametros.getStringArray("datos");
                 idProdcuto = datos[0];
-
                 tempVal = findViewById(R.id.txtCodigo);
                 tempVal.setText(datos[1]);
-
                 tempVal = findViewById(R.id.txtNombreProducto);
                 tempVal.setText(datos[2]);
-
                 tempVal = findViewById(R.id.txtMarca);
                 tempVal.setText(datos[3]);
-
                 tempVal = findViewById(R.id.txtDescripcion);
                 tempVal.setText(datos[4]);
-
                 tempVal = findViewById(R.id.txtPresentacion);
                 tempVal.setText(datos[5]);
-
                 tempVal = findViewById(R.id.txtPrecio);
                 tempVal.setText(datos[6]);
 
-                urlCompletaImg = datos[7];
-                Bitmap bitmap = BitmapFactory.decodeFile((urlCompletaImg));
-                imgFotoProducto.setImageBitmap(bitmap);
+                urlPhoto = datos[7];
+                Bitmap img = BitmapFactory.decodeFile(urlPhoto);
+                imgFotoProducto.setImageBitmap(img);
             }
+
         }catch (Exception e){
             mostrarMsgToast(e.getMessage());
+
         }
+
     }
 
     //Mostrar principal
@@ -168,7 +184,7 @@ public class agregarProducto extends AppCompatActivity {
             dirAlmacenamiento.mkdirs();
         }
         File image = File.createTempFile(nombreimagen,".jpg",dirAlmacenamiento);
-        urlCompletaImg = image.getAbsolutePath();
+        urlPhoto = image.getAbsolutePath();
         return image;
     }
 
@@ -182,20 +198,12 @@ public class agregarProducto extends AppCompatActivity {
 
         try {
             if (requestCode==1 && resultCode==RESULT_OK){
-                Bitmap imagenBitmap = BitmapFactory.decodeFile(urlCompletaImg);
+                Bitmap imagenBitmap = BitmapFactory.decodeFile(urlPhoto);
                 imgFotoProducto.setImageBitmap(imagenBitmap);
             }
 
         }catch (Exception e){
-            mostrarMsgToast(e.getMessage());
+            mostrarMsgToast(e.getMessage() + "Aca hay error xd xd xd");
         }
     }
-
-
-
-
-
-
-
-
 }
