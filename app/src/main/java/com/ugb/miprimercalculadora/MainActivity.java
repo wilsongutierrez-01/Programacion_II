@@ -1,6 +1,7 @@
 package com.ugb.miprimercalculadora;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -56,10 +57,50 @@ public class MainActivity extends AppCompatActivity {
             agregarProductos("nuevo", new String[]{});
         } );
 
-
-
 }
-//Mostrar mensje
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater mymenu =getMenuInflater();
+        mymenu.inflate(R.menu.menu,menu);
+        AdapterView.AdapterContextMenuInfo mymenuInfo = (AdapterView.AdapterContextMenuInfo)menuInfo;
+        datosProductosCursos.moveToPosition(mymenuInfo.position);
+        menu.setHeaderTitle(datosProductosCursos.getString(1));
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        try {
+            switch (item.getItemId()){
+                case R.id.mnxagregar:
+                    agregarProductos("nuevo", new String[]{});
+                    break;
+
+                case R.id.mnxmodificar:
+                    String [] datos ={
+                            datosProductosCursos.getString(0),
+                            datosProductosCursos.getString(1),
+                            datosProductosCursos.getString(2),
+                            datosProductosCursos.getString(3),
+                            datosProductosCursos.getString(4),
+                            datosProductosCursos.getString(5),
+                            datosProductosCursos.getString(6),
+                            datosProductosCursos.getString(7),
+
+                    };
+                    agregarProductos("modificar",datos);
+                    break;
+
+            }
+
+        }catch (Exception e){
+            mostrarMsgToast(e.getMessage());
+        }
+        return super.onContextItemSelected(item);
+    }
+
+    //Mostrar mensje
     private void mostrarMsgToast(String msg){
         Toast.makeText(getApplicationContext(),msg, Toast.LENGTH_LONG).show();
     }

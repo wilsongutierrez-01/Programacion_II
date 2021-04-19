@@ -43,26 +43,24 @@ public class adaptadorImagenes extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         layoutInflater = (LayoutInflater)context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         View Visor = layoutInflater.inflate(R.layout.listview_imagenes,parent,false);
-        TextView temp = Visor.findViewById(R.id.lblTitulo);
-        ImageView img = Visor.findViewById(R.id.imgPhoto);
+        TextView temp = Visor.findViewById(R.id.lblProducto);
+        ImageView img = Visor.findViewById(R.id.imgShow);
 
         try {
             misProductos = datosProductosArrayList.get(position);
             temp.setText(misProductos.getProducto());
 
             temp = Visor.findViewById(R.id.lblcodigo);
-            temp.setText("codigo: " + misProductos.getUrlPhoto());
+            temp.setText("codigo: " + misProductos.getCodigo());
 
             temp = Visor.findViewById(R.id.lblprecio);
             temp.setText("$" + misProductos.getPrecio());
 
-            try{
-                Bitmap photo = BitmapFactory.decodeFile(misProductos.getUrlPhoto());
-                img.setImageBitmap(photo);
+            temp = Visor.findViewById(R.id.lblpresentacion);
+            temp.setText("Presentacion: " + misProductos.getPresentacion());
 
-            }catch (Exception e){
-                mensajeToast(e.getMessage());
-            }
+            Bitmap photo = BitmapFactory.decodeFile(misProductos.getUrlPhoto());
+            img.setImageBitmap(photo);
 
 
         }catch (Exception e){
