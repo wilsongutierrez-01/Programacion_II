@@ -10,8 +10,8 @@ import androidx.annotation.Nullable;
 
 public class DB extends SQLiteOpenHelper {
     Context miContext;
-    static String nombreDB = "db_amigos";
-    static String tblProducto = "CREATE TABLE tblproductos(idProducto integer primary key autoincrement, producto text, codigo text, marca text, descripcion text, presentacion text, preio text, urlPhoto text)";
+    static String nombreDB = "db_productos";
+    static String tblProducto = "CREATE TABLE tblproductos(idProducto integer primary key autoincrement, codigo text, producto text, marca text, descripcion text, presentacion text, precio text, urlPhoto text)";
 
 
             /*this.idProducto = idProducto;
@@ -39,22 +39,21 @@ public class DB extends SQLiteOpenHelper {
     }
 
     public Cursor admin_productos (String accion, String [] datos ) {
-       try{
            Cursor datosCursor = null;
            SQLiteDatabase sqLiteDatabaseW = getWritableDatabase();
            SQLiteDatabase sqLiteDataBaseR =getReadableDatabase();
            switch (accion){
                case "consultar":
-                   datosCursor = sqLiteDataBaseR.rawQuery("select * from tblproductos order by nombre", null);
+                   datosCursor = sqLiteDataBaseR.rawQuery("select * from tblproductos order by producto", null);
                    break;
 
                case "nuevo":
-                   sqLiteDatabaseW.execSQL("INSERT INTO tblproductos(producto, codigo, marca, descripcion, presentacion, precio, urlPhoto) VALUES ('"+datos[1]+"', '"+datos[2]+"', '"+datos[3]+"', '"+datos[4]+"', " +
+                   sqLiteDatabaseW.execSQL("INSERT INTO tblproductos(codigo, producto, marca, descripcion, presentacion, precio, urlPhoto) VALUES ('"+datos[1]+"', '"+datos[2]+"', '"+datos[3]+"', '"+datos[4]+"', " +
                            "'"+datos[5]+"', '"+datos[6]+"', '"+datos[7]+"')");
                    break;
 
                case "modificar":
-                   sqLiteDatabaseW.execSQL("UPDATE tblproductos SET producto ='"+datos[1]+"', codigo='"+datos[2]+"', marca = '"+datos[3]+"', descripcion = '"+datos[4]+"', " +
+                   sqLiteDatabaseW.execSQL("UPDATE tblproductos SET codigo ='"+datos[1]+"', producto='"+datos[2]+"', marca = '"+datos[3]+"', descripcion = '"+datos[4]+"', " +
                            "presentacion = '"+datos[5]+"', precio = '"+datos[6]+"', urlPhoto = '"+datos[7]+"'");
 
                case "eliminar":
@@ -64,12 +63,6 @@ public class DB extends SQLiteOpenHelper {
 
 
            return datosCursor;
-
-       }catch (Exception e){
-           Toast.makeText(miContext, "Error en DB"+ e.getMessage(), Toast.LENGTH_SHORT).show();
-           return null;
-
-       }
 
     }
 

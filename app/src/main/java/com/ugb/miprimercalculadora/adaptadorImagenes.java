@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -37,29 +38,40 @@ public class adaptadorImagenes extends BaseAdapter {
     public long getItemId(int position) {
         return Long.parseLong(datosProductosArrayList.get(position).getIdProducto());
     }
+
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         layoutInflater = (LayoutInflater)context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
-        View itemView = layoutInflater.inflate(R.layout.listview_imagenes, parent, false);
-        TextView tempVal = itemView.findViewById(R.id.lblTitulo);
-        ImageView imgViewView = itemView.findViewById(R.id.imgPhoto);
-        try{
+        View Visor = layoutInflater.inflate(R.layout.listview_imagenes,parent,false);
+        TextView temp = Visor.findViewById(R.id.lblTitulo);
+        ImageView img = Visor.findViewById(R.id.imgPhoto);
+
+        try {
             misProductos = datosProductosArrayList.get(position);
-            tempVal.setText(misProductos.getProducto());
+            temp.setText(misProductos.getProducto());
 
-            tempVal = itemView.findViewById(R.id.lblcodigo);
-            tempVal.setText(misProductos.getCodigo());
+            temp = Visor.findViewById(R.id.lblcodigo);
+            temp.setText("codigo: " + misProductos.getUrlPhoto());
 
-            tempVal = itemView.findViewById(R.id.lblpresentacion);
-            tempVal.setText(misProductos.getPresentacion());
+            temp = Visor.findViewById(R.id.lblprecio);
+            temp.setText("$" + misProductos.getPrecio());
 
-            Bitmap imagenBitmap = BitmapFactory.decodeFile(misProductos.getUrlImg());
-            imgViewView.setImageBitmap(imagenBitmap);
+            try{
+                Bitmap photo = BitmapFactory.decodeFile(misProductos.getUrlPhoto());
+                img.setImageBitmap(photo);
+
+            }catch (Exception e){
+                mensajeToast(e.getMessage());
+            }
+
 
         }catch (Exception e){
+            mensajeToast(e.getMessage());
         }
-        return itemView;
+
+        return Visor;
     }
-
-
-
+   private void mensajeToast(String msg){
+        Toast.makeText(context.getApplicationContext(),msg, Toast.LENGTH_LONG).show();
+   }
 }
