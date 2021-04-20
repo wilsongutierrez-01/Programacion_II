@@ -53,14 +53,12 @@ public class agregarProducto extends AppCompatActivity {
         btn = findViewById(R.id.btnGuardarProducto);
         btn.setOnClickListener(v->{
             agregarProducto();
-            mostrarVistaPrincipal();
-
         });
         mostrarDatosProductos();
     }
     //agregar producto
     private void agregarProducto () {
-        try {
+
 
             tempVal = findViewById(R.id.txtCodigo);
             String codigo = tempVal.getText().toString();
@@ -87,9 +85,7 @@ public class agregarProducto extends AppCompatActivity {
             mostrarDatosProductos();
 
 
-        }catch (Exception e){
-            mostrarMsgToast(e.getMessage() + "aqui hay error");
-        }
+
 
     }
     //Tomar foto producto
