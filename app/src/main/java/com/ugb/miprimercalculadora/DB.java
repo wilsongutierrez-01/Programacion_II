@@ -53,16 +53,28 @@ public class DB extends SQLiteOpenHelper {
                    break;
 
                case "modificar":
-                   sqLiteDatabaseW.execSQL("UPDATE tblproductos SET codigo ='"+datos[1]+"', producto='"+datos[2]+"', marca = '"+datos[3]+"', descripcion = '"+datos[4]+"', " +
-                           "presentacion = '"+datos[5]+"', precio = '"+datos[6]+"', urlPhoto = '"+datos[7]+"'");
+                   try{
+                       sqLiteDatabaseW.execSQL("UPDATE tblproductos SET codigo ='"+datos[1]+"', producto='"+datos[2]+"', marca = '"+datos[3]+"', descripcion = '"+datos[4]+"', " +
+                               "presentacion = '"+datos[5]+"', precio = '"+datos[6]+"', urlPhoto = '"+datos[7]+"' WHERE idProducto = '"+datos[0]+"' ");
+
+                   }catch (Exception e){
+                       Toast.makeText(miContext.getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
+
+
+                   }
+
+                   break;
 
                case "eliminar":
                    sqLiteDatabaseW.execSQL("DELETE FROM tblproductos WHERE idProducto = '"+datos[0]+"'");
+                   break;
 
            }
 
 
            return datosCursor;
+
+
 
     }
 

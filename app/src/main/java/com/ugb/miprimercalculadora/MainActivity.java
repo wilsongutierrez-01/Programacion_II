@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(v-> {
             agregarProductos("nuevo", new String[]{});
         } );
+        buscarProducto();
 
 }
 
@@ -92,17 +93,87 @@ public class MainActivity extends AppCompatActivity {
                     agregarProductos("modificar",datos);
                     break;
 
-            }
+                case R.id.mnxeliminar:
+                    eliminarProdcuto();
+                    break;
 
+            }
         }catch (Exception e){
             mostrarMsgToast(e.getMessage());
         }
+
         return super.onContextItemSelected(item);
     }
 
     //Mostrar mensje
     private void mostrarMsgToast(String msg){
         Toast.makeText(getApplicationContext(),msg, Toast.LENGTH_LONG).show();
+    }
+
+    //Eliminar producto
+    private void eliminarProdcuto(){
+        try {
+            AlertDialog.Builder confirmacion = new AlertDialog.Builder(MainActivity.this);
+            confirmacion.setTitle("¿Seguro desea eliminar?");
+            confirmacion.setMessage(datosProductosCursos.getString(2));
+            confirmacion.setPositiveButton("SI", ((dialog, which) -> {
+                miDB = new DB (getApplicationContext(), "", null, 1);
+                datosProductosCursos =miDB.admin_productos("eliminar", new String[]{datosProductosCursos.getString(0)});
+                comprobardatos();
+                mostrarMsgToast("Eliminado correcto");
+                dialog.dismiss();
+            }));
+            confirmacion.setNegativeButton("NO", (dialog, which) -> {
+                mostrarMsgToast("Se cancelo eliminar");
+                dialog.dismiss();
+            });
+            confirmacion.create().show();
+
+        }catch (Exception e){
+            mostrarMsgToast(e.getMessage());
+
+        }
+    }
+    //Buscar producto
+    public void buscarProducto(){
+        TextView temp = findViewById(R.id.txtBuscarProductos);
+        temp.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                productosArrayList.clear();
+                if (temp.getText().toString().length()<1){
+                    productosArrayList.addAll(productosrrayListCopy);
+                }else{
+                    for (productos PB: productosrrayListCopy){
+                        String producto = PB.getProducto();
+                        String codigo = PB.getCodigo();
+                        String precio = PB.getPrecio();
+                        String marca = PB.getMarca();
+                        String presentacion = PB.getPresentacion();
+                        String buscando = temp.getText().toString().trim().toLowerCase();
+                        if (producto.toLowerCase().contains(buscando) ||
+                            codigo.toLowerCase().contains(buscando)   ||
+                            precio.toLowerCase().contains(buscando)   ||
+                            marca.toLowerCase().contains(buscando)    ||
+                            presentacion.toLowerCase().contains(buscando)){
+                            productosArrayList.add(PB);
+                        }
+                    }
+                }
+                adaptadorImagenes productoEncontrado = new adaptadorImagenes(getApplicationContext(), productosArrayList);
+                ltsProductos.setAdapter(productoEncontrado);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     //metodo agregar producto
