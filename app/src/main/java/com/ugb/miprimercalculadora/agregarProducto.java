@@ -32,7 +32,7 @@ public class agregarProducto extends AppCompatActivity {
     TextView tempVal;
 
 
-
+//comentarios jotos
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
