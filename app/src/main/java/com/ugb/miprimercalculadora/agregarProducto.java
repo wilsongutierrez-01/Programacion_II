@@ -18,6 +18,8 @@ import androidx.core.content.FileProvider;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.json.JSONObject;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,10 +28,12 @@ public class agregarProducto extends AppCompatActivity {
     FloatingActionButton btnAtras;
     ImageView imgFotoProducto;
     Intent tomarFotoIntent;
-    String urlPhoto, idProdcuto, accion="nuevo";
+    String urlPhoto, idProdcuto, rev, accion="nuevo";
     Button btn;
     DB miDB;
     TextView tempVal;
+    utilidades url;
+    internterDetectec di;
 
 
 //comentarios jotos
@@ -59,7 +63,7 @@ public class agregarProducto extends AppCompatActivity {
     //agregar producto
     private void agregarProducto () {
 
-
+        try {
             tempVal = findViewById(R.id.txtCodigo);
             String codigo = tempVal.getText().toString();
 
@@ -78,15 +82,34 @@ public class agregarProducto extends AppCompatActivity {
             tempVal = findViewById(R.id.txtPrecio);
             String precio = tempVal.getText().toString();
 
+            JSONObject productosData = new JSONObject();
+            if (accion.equals("modificar") && idProdcuto.length() > 0 && rev.length() > 0 ) {
+                productosData.put("_id", idProdcuto);
+                productosData.put("_rev", rev);
+            }
+            productosData.put("codigo", codigo);
+            productosData.put("producto", producto);
+            productosData.put("marca", marca);
+            productosData.put("descripcion", descripcion);
+            productosData.put("presentacion", presentacion);
+            productosData.put("precio", precio);
+            productosData.put("urlPhoto", urlPhoto);
             String [] datos = {idProdcuto,codigo,producto,marca,descripcion,presentacion,precio,urlPhoto};
+
+            di = new internterDetectec(getApplicationContext());
+            if (di.internetConnection()){
+                sendProducto objSaveProduc = new sendProducto(getApplicationContext());
+                String resp = objSaveProduc.execute(productosData.toString()).get();
+            }
+
+
             miDB.admin_productos(accion,datos);
             mostrarMsgToast("Producto guardado con exito");
             mostrarVistaPrincipal();
-            mostrarDatosProductos();
-
-
-
-
+        }catch (Exception e){
+            mostrarMsgToast(e.getMessage());
+        }
+        mostrarDatosProductos();
     }
     //Tomar foto producto
 
@@ -131,22 +154,26 @@ public class agregarProducto extends AppCompatActivity {
             Bundle parametros= getIntent().getExtras();
             accion = parametros.getString("accion");
             if (accion.equals("modificar")){
-                String[] datos = parametros.getStringArray("datos");
-                idProdcuto = datos[0];
-                tempVal = findViewById(R.id.txtCodigo);
-                tempVal.setText(datos[1]);
-                tempVal = findViewById(R.id.txtNombreProducto);
-                tempVal.setText(datos[2]);
-                tempVal = findViewById(R.id.txtMarca);
-                tempVal.setText(datos[3]);
-                tempVal = findViewById(R.id.txtDescripcion);
-                tempVal.setText(datos[4]);
-                tempVal = findViewById(R.id.txtPresentacion);
-                tempVal.setText(datos[5]);
-                tempVal = findViewById(R.id.txtPrecio);
-                tempVal.setText(datos[6]);
+                JSONObject datos = new JSONObject(parametros.getString("datos")).getJSONObject("value");
 
-                urlPhoto = datos[7];
+                idProdcuto = datos.getString("_id");
+                rev = datos.getString("_rev");
+
+                tempVal = findViewById(R.id.txtCodigo);
+                tempVal.setText(datos.getString("codigo"));
+
+                tempVal = findViewById(R.id.txtNombreProducto);
+                tempVal.setText(datos.getString("producto"));
+                tempVal = findViewById(R.id.txtMarca);
+                tempVal.setText(datos.getString("marca"));
+                tempVal = findViewById(R.id.txtDescripcion);
+                tempVal.setText(datos.getString("descripcion"));
+                tempVal = findViewById(R.id.txtPresentacion);
+                tempVal.setText(datos.getString("presentacion"));
+                tempVal = findViewById(R.id.txtPrecio);
+                tempVal.setText(datos.getString("precio"));
+
+                urlPhoto = datos.getString("urlPhoto");
                 Bitmap img = BitmapFactory.decodeFile(urlPhoto);
                 imgFotoProducto.setImageBitmap(img);
             }
