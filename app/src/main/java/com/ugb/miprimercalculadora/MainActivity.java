@@ -64,17 +64,11 @@ public class MainActivity extends AppCompatActivity {
 
         di = new internterDetectec(getApplicationContext());
         btn = findViewById(R.id.btnAgregarProductos);
-        try {
-            comprobardatos();
-        }catch (Exception e){
-            mostrarMsgToast(e.getMessage());
-        }
-
         btn.setOnClickListener(v-> {
             agregarProductos("nuevo");
         } );
-        buscarProducto();
-
+        comprobardatos();
+        mostrarProductos();
 }
 
     @Override
@@ -290,7 +284,7 @@ public class MainActivity extends AppCompatActivity {
                 for (int i = 0; i < jsonArrayProductos.length(); i++){
                     jsonObject = jsonArrayProductos.getJSONObject(i).getJSONObject("value");
                     misProductos = new productos(
-                            jsonObject.getString("_idProducto"),
+                            jsonObject.getString("_id"),
                             jsonObject.getString("_rev"),
                             jsonObject.getString("codigo"),
                             jsonObject.getString("producto"),
