@@ -28,7 +28,7 @@ public class agregarProducto extends AppCompatActivity {
     FloatingActionButton btnAtras;
     ImageView imgFotoProducto;
     Intent tomarFotoIntent;
-    String urlPhoto, idProdcuto, rev, accion="nuevo";
+    String Photos, _id, rev, accion="nuevo";
     Button btn;
     DB miDB;
     TextView tempVal;
@@ -64,40 +64,33 @@ public class agregarProducto extends AppCompatActivity {
     private void agregarProducto () {
 
         try {
-            tempVal = findViewById(R.id.txtCodigo);
-            String codigo = tempVal.getText().toString();
+            tempVal = findViewById(R.id.txtTittle);
+            String Tittle = tempVal.getText().toString();
 
-            tempVal = findViewById(R.id.txtNombreProducto);
-            String producto = tempVal.getText().toString();
+            tempVal = findViewById(R.id.txtSynopsis);
+            String Synopsis = tempVal.getText().toString();
 
-            tempVal = findViewById(R.id.txtMarca);
-            String marca = tempVal.getText().toString();
+            tempVal = findViewById(R.id.txtBuy);
+            String Buy = tempVal.getText().toString();
 
-            tempVal = findViewById(R.id.txtDescripcion);
-            String descripcion = tempVal.getText().toString();
-
-            tempVal = findViewById(R.id.txtPresentacion);
-            String presentacion = tempVal.getText().toString();
-
-            tempVal = findViewById(R.id.txtPrecio);
-            String precio = tempVal.getText().toString();
+            tempVal = findViewById(R.id.txtTime);
+            String Time = tempVal.getText().toString();
 
             JSONObject productosData = new JSONObject();
-            if (accion.equals("modificar") && idProdcuto.length() > 0 && rev.length() > 0 ) {
-                productosData.put("_id", idProdcuto);
+            if (accion.equals("modificar") && _id.length() > 0 && rev.length() > 0 ) {
+                productosData.put("_id", _id);
                 productosData.put("_rev", rev);
             }
-            productosData.put("codigo", codigo);
-            productosData.put("producto", producto);
-            productosData.put("marca", marca);
-            productosData.put("descripcion", descripcion);
-            productosData.put("presentacion", presentacion);
-            productosData.put("precio", precio);
-            productosData.put("urlPhoto", urlPhoto);
-            String [] datos = {idProdcuto,codigo,producto,marca,descripcion,presentacion,precio,urlPhoto};
+            productosData.put("Tittle", Tittle);
+            productosData.put("Synopsis", Synopsis);
+            productosData.put("Time", Time);
+            productosData.put("Buy", Buy);
+
+            productosData.put("Photos", Photos);
+            String [] datos = {_id,Tittle,Synopsis,Time,Buy,Photos};
 
             di = new internterDetectec(getApplicationContext());
-            if (di.internetConnection()){
+           if (di.internetConnection()){
                 sendProducto objSaveProduc = new sendProducto(getApplicationContext());
                 String resp = objSaveProduc.execute(productosData.toString()).get();
             }
@@ -140,15 +133,7 @@ public class agregarProducto extends AppCompatActivity {
             }
         }
     }
-    /*this.idProducto = idProducto;
-   this.codigo = codigo;
-   this.producto = producto;
-   this.marca = marca;
-   this.descripcion = descripcion;
-   this.presentacion = presentacion;
-   this.precio = precio;
-   this.urlImg = urlImg*/
-    //Mostras datos productos
+
     private void mostrarDatosProductos() {
         try {
             Bundle parametros= getIntent().getExtras();
@@ -156,25 +141,21 @@ public class agregarProducto extends AppCompatActivity {
             if (accion.equals("modificar")){
                 JSONObject datos = new JSONObject(parametros.getString("datos")).getJSONObject("value");
 
-                idProdcuto = datos.getString("_id");
+
+                _id = datos.getString("_id");
                 rev = datos.getString("_rev");
 
-                tempVal = findViewById(R.id.txtCodigo);
-                tempVal.setText(datos.getString("codigo"));
+                tempVal = findViewById(R.id.txtTittle);
+                tempVal.setText(datos.getString("Title"));
 
-                tempVal = findViewById(R.id.txtNombreProducto);
-                tempVal.setText(datos.getString("producto"));
-                tempVal = findViewById(R.id.txtMarca);
-                tempVal.setText(datos.getString("marca"));
-                tempVal = findViewById(R.id.txtDescripcion);
-                tempVal.setText(datos.getString("descripcion"));
-                tempVal = findViewById(R.id.txtPresentacion);
-                tempVal.setText(datos.getString("presentacion"));
-                tempVal = findViewById(R.id.txtPrecio);
-                tempVal.setText(datos.getString("precio"));
-
-                urlPhoto = datos.getString("urlPhoto");
-                Bitmap img = BitmapFactory.decodeFile(urlPhoto);
+                tempVal = findViewById(R.id.txtSynopsis);
+                tempVal.setText(datos.getString("Synopsis"));
+                tempVal = findViewById(R.id.txtTime);
+                tempVal.setText(datos.getString("Time"));
+                tempVal = findViewById(R.id.txtBuy);
+                tempVal.setText(datos.getString("Buy"));
+                Photos = datos.getString("urlPhoto");
+                Bitmap img = BitmapFactory.decodeFile(Photos);
                 imgFotoProducto.setImageBitmap(img);
             }
 
@@ -207,7 +188,7 @@ public class agregarProducto extends AppCompatActivity {
             dirAlmacenamiento.mkdirs();
         }
         File image = File.createTempFile(nombreimagen,".jpg",dirAlmacenamiento);
-        urlPhoto = image.getAbsolutePath();
+        Photos = image.getAbsolutePath();
         return image;
     }
 
@@ -221,7 +202,7 @@ public class agregarProducto extends AppCompatActivity {
 
         try {
             if (requestCode==1 && resultCode==RESULT_OK){
-                Bitmap imagenBitmap = BitmapFactory.decodeFile(urlPhoto);
+                Bitmap imagenBitmap = BitmapFactory.decodeFile(Photos);
                 imgFotoProducto.setImageBitmap(imagenBitmap);
             }
 

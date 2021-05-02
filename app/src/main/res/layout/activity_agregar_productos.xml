@@ -32,58 +32,40 @@
             </androidx.cardview.widget.CardView>
 
             <EditText
-                android:id="@+id/txtCodigo"
+                android:id="@+id/txtTittle"
                 android:layout_below="@id/cvrPhoto"
                 android:layout_margin="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Codigo"/>
+                android:hint="Movie Tittle"/>
             <EditText
-                android:id="@+id/txtNombreProducto"
-                android:layout_below="@id/txtCodigo"
+                android:id="@+id/txtSynopsis"
+                android:layout_below="@id/txtTittle"
                 android:layout_margin="10dp"
-                android:hint="Producto"
+                android:hint="Synopsis"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <EditText
-                android:id="@+id/txtMarca"
-                android:layout_below="@id/txtNombreProducto"
+                android:id="@+id/txtTime"
+                android:layout_below="@id/txtTime"
                 android:layout_margin="10dp"
-                android:hint="Marca"
+                android:hint="Time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
             <EditText
-                android:id="@+id/txtPresentacion"
+                android:id="@+id/txtBuy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Presentacion"
+                android:hint="Buy for:"
                 android:layout_margin="10dp"
                 android:layout_below="@+id/txtMarca"/>
 
-            <EditText
-                android:id="@+id/txtDescripcion"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/txtPrecio"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
-                android:hint="Descripcion" />
 
-            <EditText
-                android:id="@+id/txtPrecio"
-                android:layout_below="@id/btnGuardarProducto"
-                android:layout_margin="10dp"
-                android:hint="Precio"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+
             <Button
                 android:id="@+id/btnGuardarProducto"
-                android:layout_below="@id/txtPresentacion"
+                android:layout_below="@id/txtBuy"
                 android:layout_margin="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

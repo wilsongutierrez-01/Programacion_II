@@ -36,30 +36,30 @@ public class adaptadorImagenes extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return Long.parseLong(datosProductosArrayList.get(position).getIdProducto());
+        return 0;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         layoutInflater = (LayoutInflater)context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         View Visor = layoutInflater.inflate(R.layout.listview_imagenes,parent,false);
-        TextView temp = Visor.findViewById(R.id.lblProducto);
+        TextView temp = Visor.findViewById(R.id.lblTittle);
         ImageView img = Visor.findViewById(R.id.imgShow);
 
         try {
             misProductos = datosProductosArrayList.get(position);
-            temp.setText(misProductos.getProducto());
+            temp.setText(misProductos.getTittle());
 
-            temp = Visor.findViewById(R.id.lblcodigo);
-            temp.setText("codigo: " + misProductos.getCodigo());
+            temp = Visor.findViewById(R.id.lblSynopsis);
+            temp.setText("Synopsis: \n" + misProductos.getSynopsis());
 
-            temp = Visor.findViewById(R.id.lblprecio);
-            temp.setText("$" + misProductos.getPrecio());
+            temp = Visor.findViewById(R.id.lblBuy);
+            temp.setText("$" + misProductos.getBuy());
 
-            temp = Visor.findViewById(R.id.lblpresentacion);
-            temp.setText("Presentacion: " + misProductos.getPresentacion());
+            temp = Visor.findViewById(R.id.lblTime);
+            temp.setText("Time: " + misProductos.getTime());
 
-            Bitmap photo = BitmapFactory.decodeFile(misProductos.getUrlPhoto());
+            Bitmap photo = BitmapFactory.decodeFile(misProductos.getPhotos());
             img.setImageBitmap(photo);
 
 
