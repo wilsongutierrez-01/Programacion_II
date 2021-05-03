@@ -7,12 +7,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.security.identity.CipherSuiteNotSupportedException;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
@@ -26,14 +28,17 @@ import java.util.Date;
 
 public class agregarProducto extends AppCompatActivity {
     FloatingActionButton btnAtras;
-    ImageView imgFotoProducto;
+    ImageView imgFotoProducto, imgFotoProductos;
     Intent tomarFotoIntent;
-    String urlPhoto, idProdcuto, rev, accion="nuevo";
+    String Photos, _id, rev, accion="nuevo";
+    Uri Photosuri;
     Button btn;
+    int op;
     DB miDB;
     TextView tempVal;
     utilidades url;
     internterDetectec di;
+    private static final int PICK_IMAGE = 100;
 
 
 //comentarios jotos
@@ -51,11 +56,27 @@ public class agregarProducto extends AppCompatActivity {
 
         imgFotoProducto = findViewById(R.id.imgFotoProducto);
         imgFotoProducto.setOnClickListener(v -> {
-            tomarFotoProducto();
+
+            AlertDialog.Builder foto = new  AlertDialog.Builder(agregarProducto.this);
+            foto.setTitle("Imagen");
+            foto.setMessage("Obetner imagen desde:");
+            foto.setPositiveButton("Galeria", ((dialog, which) ->{
+                op = 1;
+                seleccionarImagen();
+            }));
+
+            foto.setNegativeButton("Camara", ((dialog, which) ->{
+                op = 2;
+                tomarFotoProducto();
+            }));
+
+           foto.create().show();
         });
 
         btn = findViewById(R.id.btnGuardarProducto);
         btn.setOnClickListener(v->{
+
+
             agregarProducto();
         });
         mostrarDatosProductos();
@@ -64,40 +85,33 @@ public class agregarProducto extends AppCompatActivity {
     private void agregarProducto () {
 
         try {
-            tempVal = findViewById(R.id.txtCodigo);
-            String codigo = tempVal.getText().toString();
+            tempVal = findViewById(R.id.txtTittle);
+            String Tittle = tempVal.getText().toString();
 
-            tempVal = findViewById(R.id.txtNombreProducto);
-            String producto = tempVal.getText().toString();
+            tempVal = findViewById(R.id.txtSynopsis);
+            String Synopsis = tempVal.getText().toString();
 
-            tempVal = findViewById(R.id.txtMarca);
-            String marca = tempVal.getText().toString();
+            tempVal = findViewById(R.id.txtBuy);
+            String Buy = tempVal.getText().toString();
 
-            tempVal = findViewById(R.id.txtDescripcion);
-            String descripcion = tempVal.getText().toString();
-
-            tempVal = findViewById(R.id.txtPresentacion);
-            String presentacion = tempVal.getText().toString();
-
-            tempVal = findViewById(R.id.txtPrecio);
-            String precio = tempVal.getText().toString();
+            tempVal = findViewById(R.id.txtTime);
+            String Time = tempVal.getText().toString();
 
             JSONObject productosData = new JSONObject();
-            if (accion.equals("modificar") && idProdcuto.length() > 0 && rev.length() > 0 ) {
-                productosData.put("_id", idProdcuto);
+            if (accion.equals("modificar") && _id.length() > 0 && rev.length() > 0 ) {
+                productosData.put("_id", _id);
                 productosData.put("_rev", rev);
             }
-            productosData.put("codigo", codigo);
-            productosData.put("producto", producto);
-            productosData.put("marca", marca);
-            productosData.put("descripcion", descripcion);
-            productosData.put("presentacion", presentacion);
-            productosData.put("precio", precio);
-            productosData.put("urlPhoto", urlPhoto);
-            String [] datos = {idProdcuto,codigo,producto,marca,descripcion,presentacion,precio,urlPhoto};
+            productosData.put("Tittle", Tittle);
+            productosData.put("Synopsis", Synopsis);
+            productosData.put("Time", Time);
+            productosData.put("Buy", Buy);
+
+            productosData.put("Photos", Photos);
+            String [] datos = {_id,Tittle,Synopsis,Time,Buy,Photos};
 
             di = new internterDetectec(getApplicationContext());
-            if (di.internetConnection()){
+           if (di.internetConnection()){
                 sendProducto objSaveProduc = new sendProducto(getApplicationContext());
                 String resp = objSaveProduc.execute(productosData.toString()).get();
             }
@@ -140,15 +154,7 @@ public class agregarProducto extends AppCompatActivity {
             }
         }
     }
-    /*this.idProducto = idProducto;
-   this.codigo = codigo;
-   this.producto = producto;
-   this.marca = marca;
-   this.descripcion = descripcion;
-   this.presentacion = presentacion;
-   this.precio = precio;
-   this.urlImg = urlImg*/
-    //Mostras datos productos
+
     private void mostrarDatosProductos() {
         try {
             Bundle parametros= getIntent().getExtras();
@@ -156,25 +162,21 @@ public class agregarProducto extends AppCompatActivity {
             if (accion.equals("modificar")){
                 JSONObject datos = new JSONObject(parametros.getString("datos")).getJSONObject("value");
 
-                idProdcuto = datos.getString("_id");
+
+                _id = datos.getString("_id");
                 rev = datos.getString("_rev");
 
-                tempVal = findViewById(R.id.txtCodigo);
-                tempVal.setText(datos.getString("codigo"));
+                tempVal = findViewById(R.id.txtTittle);
+                tempVal.setText(datos.getString("Tittle"));
 
-                tempVal = findViewById(R.id.txtNombreProducto);
-                tempVal.setText(datos.getString("producto"));
-                tempVal = findViewById(R.id.txtMarca);
-                tempVal.setText(datos.getString("marca"));
-                tempVal = findViewById(R.id.txtDescripcion);
-                tempVal.setText(datos.getString("descripcion"));
-                tempVal = findViewById(R.id.txtPresentacion);
-                tempVal.setText(datos.getString("presentacion"));
-                tempVal = findViewById(R.id.txtPrecio);
-                tempVal.setText(datos.getString("precio"));
-
-                urlPhoto = datos.getString("urlPhoto");
-                Bitmap img = BitmapFactory.decodeFile(urlPhoto);
+                tempVal = findViewById(R.id.txtSynopsis);
+                tempVal.setText(datos.getString("Synopsis"));
+                tempVal = findViewById(R.id.txtTime);
+                tempVal.setText(datos.getString("Time"));
+                tempVal = findViewById(R.id.txtBuy);
+                tempVal.setText(datos.getString("Buy"));
+                Photos = datos.getString("urlPhoto");
+                Bitmap img = BitmapFactory.decodeFile(Photos);
                 imgFotoProducto.setImageBitmap(img);
             }
 
@@ -207,7 +209,7 @@ public class agregarProducto extends AppCompatActivity {
             dirAlmacenamiento.mkdirs();
         }
         File image = File.createTempFile(nombreimagen,".jpg",dirAlmacenamiento);
-        urlPhoto = image.getAbsolutePath();
+        Photos = image.getAbsolutePath();
         return image;
     }
 
@@ -219,14 +221,56 @@ public class agregarProducto extends AppCompatActivity {
     protected void onActivityResult (int requestCode, int resultCode, @Nullable Intent data){
         super.onActivityResult(requestCode, resultCode, data);
 
-        try {
-            if (requestCode==1 && resultCode==RESULT_OK){
-                Bitmap imagenBitmap = BitmapFactory.decodeFile(urlPhoto);
-                imgFotoProducto.setImageBitmap(imagenBitmap);
+        if (op == 1){
+            try {
+                if (requestCode==2 && resultCode==RESULT_OK){
+                    Bitmap img = BitmapFactory.decodeFile(Photos);
+                    imgFotoProducto.setImageBitmap(img);
+                }
+
+            }catch (Exception e){
+                mostrarMsgToast(e.getMessage() + "Error desde Galeria");
+            }
+        }
+        if ( op == 2){
+            try {
+                if (requestCode==1 && resultCode==RESULT_OK){
+                    Bitmap imagenBitmap = BitmapFactory.decodeFile(Photos);
+                    imgFotoProducto.setImageBitmap(imagenBitmap);
+                }
+
+            }catch (Exception e){
+                mostrarMsgToast(e.getMessage() + "Error desde camara");
             }
 
-        }catch (Exception e){
-            mostrarMsgToast(e.getMessage() + "Aca hay error xd xd xd");
+        }
+
+
+    }
+
+    //Seleccionar de Galeria
+
+    public void  seleccionarImagen (){
+        Intent galery  = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        if (galery.resolveActivity(getPackageManager())!= null){
+            File photo = null;
+            try {
+                photo = crearImagenProducto();
+
+            }catch (Exception e){
+                mostrarMsgToast(e.getMessage());
+            }
+            if (photo != null){
+                try {
+                    startActivityForResult(galery,2);
+                }catch (Exception e){
+                    mostrarMsgToast(e.getMessage());
+                }
+            }else {
+                mostrarMsgToast("No se pudo obtener");
+            }
+
         }
     }
+
 }

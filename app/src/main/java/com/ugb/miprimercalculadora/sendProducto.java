@@ -2,6 +2,7 @@ package com.ugb.miprimercalculadora;
 
 import android.content.AsyncQueryHandler;
 import android.content.Context;
+import android.net.UrlQuerySanitizer;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -18,7 +19,7 @@ public class sendProducto extends AsyncTask<String, String, String> {
     Context context;
     utilidades uc = new utilidades();
     String resp;
-    HttpURLConnection urlConnection;
+
 
     public sendProducto(Context context) {
         this.context = context;
@@ -29,13 +30,49 @@ public class sendProducto extends AsyncTask<String, String, String> {
         super.onPostExecute(s);
     }
 
+    HttpURLConnection urlConnection;
     @Override
-    protected String doInBackground(String... pms) {
+    protected String doInBackground(String... parametros) {
         String jsonResponse = null;
-        String jsonDatos =pms[0];
-        BufferedReader lectorBuffer;
+        String jsonDatos = parametros[0];
+        BufferedReader bufferedReader;
 
-        try {
+        try{
+            URL url = new URL(uc.url_mto);
+            urlConnection = (HttpURLConnection)url.openConnection();
+            urlConnection.setDoInput(true);
+            urlConnection.setDoOutput(true);
+            urlConnection.setRequestMethod("POST");
+            urlConnection.setRequestProperty("Content-Type", "application/json");
+            urlConnection.setRequestProperty("Accept", "application/json");
+
+            Writer writer = new  BufferedWriter(new OutputStreamWriter(urlConnection.getOutputStream(),"UTF-8"));
+            writer.write(jsonDatos);
+            writer.close();
+
+
+            InputStream inputStream = urlConnection.getInputStream();
+            if (inputStream == null){
+                return null;
+            }
+            bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            resp = bufferedReader.toString();
+
+            String line;
+            StringBuffer stringBuffer = new StringBuffer();
+            while ((line=bufferedReader.readLine())!=null){
+                stringBuffer.append(line+"\n");
+            }
+            if (stringBuffer.length()==0){
+                return null;
+            }
+            jsonResponse = stringBuffer.toString();
+            return jsonResponse;
+        }catch (Exception e){
+            Log.d("ENVIANDO", "error" + e.getMessage());
+        }
+
+       /* try {
             URL url = new URL(uc.url_mto);
             urlConnection = (HttpURLConnection)url.openConnection();
             urlConnection.setDoInput(true);
@@ -70,7 +107,7 @@ public class sendProducto extends AsyncTask<String, String, String> {
 
         }catch (Exception e){
             Log.d("ENVIANDO", "error" + e.getMessage());
-        }
+        }*/
         return null;
     }
 }
