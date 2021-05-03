@@ -51,7 +51,7 @@ public class adaptadorImagenes extends BaseAdapter {
             temp.setText(misProductos.getTittle());
 
             temp = Visor.findViewById(R.id.lblSynopsis);
-            temp.setText("Synopsis: \n" + misProductos.getSynopsis());
+            temp.setText("Synopsis: \n" + misProductos.getPhotos());
 
             temp = Visor.findViewById(R.id.lblBuy);
             temp.setText("$" + misProductos.getBuy());
@@ -61,6 +61,7 @@ public class adaptadorImagenes extends BaseAdapter {
 
             Bitmap photo = BitmapFactory.decodeFile(misProductos.getPhotos());
             img.setImageBitmap(photo);
+
 
 
         }catch (Exception e){

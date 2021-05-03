@@ -283,6 +283,7 @@ public class MainActivity extends AppCompatActivity {
     }
     //mostrar productos
     private void mostrarProductos() {
+
        try {
            if (jsonArrayProductos.length()>0){
                ltsProductos = findViewById(R.id.ltsproducotos);
@@ -296,15 +297,17 @@ public class MainActivity extends AppCompatActivity {
 
                    productosArrayList.add(misProductos);
                }
-               adaptadorImagenes adapter = new adaptadorImagenes(getApplicationContext(), productosArrayList);
-               ltsProductos.setAdapter(adapter);
+                   adaptadorImagenes adapter = new adaptadorImagenes(getApplicationContext(), productosArrayList);
+                   ltsProductos.setAdapter(adapter);
 
-               registerForContextMenu(ltsProductos);
+                   registerForContextMenu(ltsProductos);
 
-               productosrrayListCopy.addAll(productosArrayList);
+                   productosrrayListCopy.addAll(productosArrayList);
+
 
            }else{
-
+               mostrarMsgToast("Sin registros");
+               agregarProductos("nuevo");
            }
 
        }catch (Exception e){

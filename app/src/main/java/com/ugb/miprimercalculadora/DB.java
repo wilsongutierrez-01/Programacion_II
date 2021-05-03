@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 public class DB extends SQLiteOpenHelper {
     Context miContext;
     static String nombreDB = "db_movies";
-    static String tblMovie = "CREATE TABLE tblmovies(id integer primary key autoincrement, Tittle text, Synopsis text, Time text, Buy text, Photos text)";
+    static String tblMovie = "CREATE TABLE tblmovies(_id integer primary key autoincrement, Tittle text, Synopsis text, Time text, Buy text, Photos text)";
 
 
             /*this.idProducto = idProducto;
@@ -42,20 +42,48 @@ public class DB extends SQLiteOpenHelper {
            Cursor datosCursor = null;
            SQLiteDatabase sqLiteDatabaseW = getWritableDatabase();
            SQLiteDatabase sqLiteDataBaseR =getReadableDatabase();
-           switch (accion){
+
+           try {
+               switch (accion){
+                   case "consultar":
+                       datosCursor = sqLiteDataBaseR.rawQuery("select * from tblmovies order by Tittle", null);
+                       break;
+
+                   case "nuevo":
+                       sqLiteDatabaseW.execSQL("INSERT INTO tblmovies(Tittle, Synopsis, Time, Buy, Photos) VALUES ('"+datos[1]+"', '"+datos[2]+"', '"+datos[3]+"', '"+datos[4]+"', " +"'"+datos[5]+"')");
+                       break;
+
+                   case "modificar":
+
+                           sqLiteDatabaseW.execSQL("UPDATE tblmovies SET Tittle ='"+datos[1]+"', Synopsis='"+datos[2]+"', Time = '"+datos[3]+"', Buy = '"+datos[4]+"', " +
+                                   "Photos = '"+datos[5]+"' WHERE _id= '"+datos[0]+ "'");
+
+                       break;
+
+                   case "eliminar":
+                       sqLiteDatabaseW.execSQL("DELETE FROM tblmovies WHERE _id = '"+datos[0]+"'");
+                       break;
+
+               }
+               return datosCursor;
+
+           }catch (Exception e){
+               Toast.makeText(miContext, "Error en la administracion de la BD "+ e.getMessage(), Toast.LENGTH_LONG).show();
+               return datosCursor;
+           }
+          /* switch (accion){
                case "consultar":
                    datosCursor = sqLiteDataBaseR.rawQuery("select * from tblmovies order by Tittle", null);
                    break;
 
                case "nuevo":
-                   sqLiteDatabaseW.execSQL("INSERT INTO tblmovies(Tittle, Synopsis, Time, Buy, Photos) VALUES ('"+datos[1]+"', '"+datos[2]+"', '"+datos[3]+"', '"+datos[4]+"', " +
-                           "'"+datos[5]+"')");
+                   sqLiteDatabaseW.execSQL("INSERT INTO tblmovies(Tittle, Synopsis, Time, Buy, Photos) VALUES ('"+datos[1]+"', '"+datos[2]+"', '"+datos[3]+"', '"+datos[4]+"', " +"'"+datos[5]+"')");
                    break;
 
                case "modificar":
                    try{
                        sqLiteDatabaseW.execSQL("UPDATE tblmovies SET Tittle ='"+datos[1]+"', Synopsis='"+datos[2]+"', Time = '"+datos[3]+"', Buy = '"+datos[4]+"', " +
-                               "Photos = '"+datos[5]+"'");
+                               "Photos = '"+datos[5]+"' WHERE _id= '"+datos[0]+ "'");
 
                    }catch (Exception e){
                        Toast.makeText(miContext.getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
@@ -66,16 +94,11 @@ public class DB extends SQLiteOpenHelper {
                    break;
 
                case "eliminar":
-                   sqLiteDatabaseW.execSQL("DELETE FROM tblmovies WHERE id = '"+datos[0]+"'");
+                   sqLiteDatabaseW.execSQL("DELETE FROM tblmovies WHERE _id = '"+datos[0]+"'");
                    break;
 
            }
-
-
-           return datosCursor;
-
-
-
+           return datosCursor;*/
     }
 
 }

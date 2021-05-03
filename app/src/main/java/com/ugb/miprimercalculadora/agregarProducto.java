@@ -7,12 +7,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.security.identity.CipherSuiteNotSupportedException;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
@@ -26,14 +28,17 @@ import java.util.Date;
 
 public class agregarProducto extends AppCompatActivity {
     FloatingActionButton btnAtras;
-    ImageView imgFotoProducto;
+    ImageView imgFotoProducto, imgFotoProductos;
     Intent tomarFotoIntent;
     String Photos, _id, rev, accion="nuevo";
+    Uri Photosuri;
     Button btn;
+    int op;
     DB miDB;
     TextView tempVal;
     utilidades url;
     internterDetectec di;
+    private static final int PICK_IMAGE = 100;
 
 
 
@@ -51,11 +56,27 @@ public class agregarProducto extends AppCompatActivity {
 
         imgFotoProducto = findViewById(R.id.imgFotoProducto);
         imgFotoProducto.setOnClickListener(v -> {
-            tomarFotoProducto();
+
+            AlertDialog.Builder foto = new  AlertDialog.Builder(agregarProducto.this);
+            foto.setTitle("Imagen");
+            foto.setMessage("Obetner imagen desde:");
+            foto.setPositiveButton("Galeria", ((dialog, which) ->{
+                op = 1;
+                seleccionarImagen();
+            }));
+
+            foto.setNegativeButton("Camara", ((dialog, which) ->{
+                op = 2;
+                tomarFotoProducto();
+            }));
+
+           foto.create().show();
         });
 
         btn = findViewById(R.id.btnGuardarProducto);
         btn.setOnClickListener(v->{
+
+
             agregarProducto();
         });
         mostrarDatosProductos();
@@ -146,7 +167,7 @@ public class agregarProducto extends AppCompatActivity {
                 rev = datos.getString("_rev");
 
                 tempVal = findViewById(R.id.txtTittle);
-                tempVal.setText(datos.getString("Title"));
+                tempVal.setText(datos.getString("Tittle"));
 
                 tempVal = findViewById(R.id.txtSynopsis);
                 tempVal.setText(datos.getString("Synopsis"));
@@ -200,14 +221,56 @@ public class agregarProducto extends AppCompatActivity {
     protected void onActivityResult (int requestCode, int resultCode, @Nullable Intent data){
         super.onActivityResult(requestCode, resultCode, data);
 
-        try {
-            if (requestCode==1 && resultCode==RESULT_OK){
-                Bitmap imagenBitmap = BitmapFactory.decodeFile(Photos);
-                imgFotoProducto.setImageBitmap(imagenBitmap);
+        if (op == 1){
+            try {
+                if (requestCode==2 && resultCode==RESULT_OK){
+                    Bitmap img = BitmapFactory.decodeFile(Photos);
+                    imgFotoProducto.setImageBitmap(img);
+                }
+
+            }catch (Exception e){
+                mostrarMsgToast(e.getMessage() + "Error desde Galeria");
+            }
+        }
+        if ( op == 2){
+            try {
+                if (requestCode==1 && resultCode==RESULT_OK){
+                    Bitmap imagenBitmap = BitmapFactory.decodeFile(Photos);
+                    imgFotoProducto.setImageBitmap(imagenBitmap);
+                }
+
+            }catch (Exception e){
+                mostrarMsgToast(e.getMessage() + "Error desde camara");
             }
 
-        }catch (Exception e){
-            mostrarMsgToast(e.getMessage() + "Aca hay error xd xd xd");
+        }
+
+
+    }
+
+    //Seleccionar de Galeria
+
+    public void  seleccionarImagen (){
+        Intent galery  = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        if (galery.resolveActivity(getPackageManager())!= null){
+            File photo = null;
+            try {
+                photo = crearImagenProducto();
+
+            }catch (Exception e){
+                mostrarMsgToast(e.getMessage());
+            }
+            if (photo != null){
+                try {
+                    startActivityForResult(galery,2);
+                }catch (Exception e){
+                    mostrarMsgToast(e.getMessage());
+                }
+            }else {
+                mostrarMsgToast("No se pudo obtener");
+            }
+
         }
     }
+
 }
