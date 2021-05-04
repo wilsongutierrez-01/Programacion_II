@@ -1,11 +1,14 @@
 package com.ugb.miprimercalculadora;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.security.identity.CipherSuiteNotSupportedException;
 import android.widget.Button;
@@ -30,7 +33,10 @@ public class agregarProducto extends AppCompatActivity {
     FloatingActionButton btnAtras;
     ImageView imgFotoProducto, imgFotoProductos;
     Intent tomarFotoIntent;
-    String Photos, _id, rev, accion="nuevo";
+    String Photos;
+    String _id;
+    String rev;
+    String accion="nuevo";
     Uri Photosuri;
     Button btn;
     int op;
@@ -39,6 +45,7 @@ public class agregarProducto extends AppCompatActivity {
     utilidades url;
     internterDetectec di;
     private static final int PICK_IMAGE = 100;
+    final int COD_SELECCIONA=10;
 
 
 
@@ -213,7 +220,21 @@ public class agregarProducto extends AppCompatActivity {
         return image;
     }
 
+public static String getRealUrl(final Context context, final Uri uri){
+        final Boolean Kit = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
+        if (Kit && DocumentsContract.isDocumentUri(context,uri)){
+            Uri finaluri = null;
 
+            finaluri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+            String loc = finaluri.toString();
+
+            return loc;
+        }
+
+
+        return null;
+
+}
 
 
     //Activity Result
@@ -224,13 +245,14 @@ public class agregarProducto extends AppCompatActivity {
         if (op == 1){
             try {
                 if (requestCode==2 && resultCode==RESULT_OK){
-                    Bitmap img = BitmapFactory.decodeFile(Photos);
-                    imgFotoProducto.setImageBitmap(img);
+                    Bitmap imagenBitmap = BitmapFactory.decodeFile(Photos);
+                    imgFotoProducto.setImageBitmap(imagenBitmap);
                 }
 
             }catch (Exception e){
                 mostrarMsgToast(e.getMessage() + "Error desde Galeria");
             }
+
         }
         if ( op == 2){
             try {
@@ -249,6 +271,12 @@ public class agregarProducto extends AppCompatActivity {
     }
 
     //Seleccionar de Galeria
+    /*
+          if (opciones[i].equals("Cargar Imagen")){
+                        Intent intent=new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        intent.setType("image/");
+                        startActivityForResult(intent.createChooser(intent,"Seleccione la Aplicación"),COD_SELECCIONA);
+     */
 
     public void  seleccionarImagen (){
         Intent galery  = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.INTERNAL_CONTENT_URI);
@@ -262,6 +290,8 @@ public class agregarProducto extends AppCompatActivity {
             }
             if (photo != null){
                 try {
+                    Uri uriPhotoProducto = FileProvider.getUriForFile(agregarProducto.this, "com.ugb.miprimercalculadora.fileprovider", photo);
+                    galery.putExtra(MediaStore.EXTRA_OUTPUT,uriPhotoProducto);
                     startActivityForResult(galery,2);
                 }catch (Exception e){
                     mostrarMsgToast(e.getMessage());

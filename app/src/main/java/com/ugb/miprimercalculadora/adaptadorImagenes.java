@@ -51,7 +51,7 @@ public class adaptadorImagenes extends BaseAdapter {
             temp.setText(misProductos.getTittle());
 
             temp = Visor.findViewById(R.id.lblSynopsis);
-            temp.setText("Synopsis: \n" + misProductos.getPhotos());
+            temp.setText("Synopsis: \n" + misProductos.getSynopsis());
 
             temp = Visor.findViewById(R.id.lblBuy);
             temp.setText("$" + misProductos.getBuy());
