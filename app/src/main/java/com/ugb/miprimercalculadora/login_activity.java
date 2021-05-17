@@ -31,11 +31,17 @@ public class login_activity extends AppCompatActivity {
     TextView temp;
     String idUsuario, accion = "nuevo";
     DB miDB;
+    Button crearCuenta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_activity);
+
+        crearCuenta = findViewById(R.id.btnCrearCuenta);
+        crearCuenta.setOnClickListener(v -> {
+            agregarUsuario();
+        });
 
 
 
@@ -54,6 +60,7 @@ private void agregarUsuario (){
         String datos[] = {idUsuario, usuario, correo, contra};
         miDB.admin_usuarios(accion,datos);
         mensaje("Usuario creado con correctamente");
+        inicio();
 
 }
 
