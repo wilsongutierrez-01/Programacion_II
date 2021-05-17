@@ -39,15 +39,26 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.Provider;
 import java.util.ArrayList;
 import java.util.MissingFormatArgumentException;
 
 public class MainActivity extends AppCompatActivity {
+    Button btnGoogle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        btnGoogle = findViewById(R.id.btnCrearCuenta);
+        btnGoogle.setOnClickListener(v -> {
+            crearCuenta();
+        });
+}
+
+protected void crearCuenta(){
+        Intent crearCuenta = new Intent(getApplicationContext(), login_activity.class);
+            startActivity(crearCuenta);
 }
 
 }
