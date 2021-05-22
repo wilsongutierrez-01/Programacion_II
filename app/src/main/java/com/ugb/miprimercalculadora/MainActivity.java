@@ -57,8 +57,18 @@ public class MainActivity extends AppCompatActivity {
 }
 
 protected void crearCuenta(){
+        try {
+
+        }catch (Exception e){
+            mensaje(e.getMessage());
+
+        }
         Intent crearCuenta = new Intent(getApplicationContext(), login_activity.class);
             startActivity(crearCuenta);
+}
+
+private void mensaje (String msg){
+        Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_LONG).show();
 }
 
 }

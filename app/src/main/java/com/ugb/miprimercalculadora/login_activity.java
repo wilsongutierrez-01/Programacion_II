@@ -31,36 +31,48 @@ public class login_activity extends AppCompatActivity {
     TextView temp;
     String idUsuario, accion = "nuevo";
     DB miDB;
-    Button crearCuenta;
+    Button btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_activity);
+       miDB = new DB(getApplicationContext(),"", null, 1);
 
-        crearCuenta = findViewById(R.id.btnCrearCuenta);
-        crearCuenta.setOnClickListener(v -> {
-            agregarUsuario();
-        });
+       try {
+           btn = findViewById(R.id.btnGuardar);
+           btn.setOnClickListener(v -> {
+               agregarUsuario();
+           });
+
+
+       }catch (Exception e){
+           mensaje(e.getMessage());
+       }
 
 
 
 
     }
 private void agregarUsuario (){
-        temp = findViewById(R.id.txtUsuario);
-        String usuario = temp.getText().toString();
+        try {
+            temp = findViewById(R.id.txtUsuario);
+            String usuario = temp.getText().toString();
 
-        temp = findViewById(R.id.txtCorreo);
-        String correo = temp.getText().toString();
+            temp = findViewById(R.id.txtCorreo);
+            String correo = temp.getText().toString();
 
-        temp = findViewById(R.id.txtContraseña);
-        String contra = temp.getText().toString();
+            temp = findViewById(R.id.txtContraseña);
+            String contra = temp.getText().toString();
 
-        String datos[] = {idUsuario, usuario, correo, contra};
-        miDB.admin_usuarios(accion,datos);
-        mensaje("Usuario creado con correctamente");
-        inicio();
+            String datos[] = {idUsuario, usuario, correo, contra};
+            miDB.admin_usuarios(accion,datos);
+            mensaje("Usuario creado con correctamente");
+            inicio();
+
+        }catch (Exception e){
+            mensaje(e.getMessage() + "Error en guardar");
+        }
 
 }
 
