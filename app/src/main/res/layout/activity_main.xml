@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/contenidoView"
+    android:background="#06DEFB"
     tools:context=".MainActivity">
 
     <EditText
@@ -58,6 +59,15 @@
         android:layout_height="wrap_content"
         android:text="Iniciar sesion"
         android:layout_marginTop="400dp"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:id="@+id/btnCrearCuenta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnIniciarSesion"
+        android:text="Crear Cuenta"
+        android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"/>
 
 
