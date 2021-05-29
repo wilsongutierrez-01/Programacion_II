@@ -1,0 +1,39 @@
+  {
+  "project_info": {
+    "project_number": "980088209281",
+    "project_id": "mandaditos-5d7db",
+    "storage_bucket": "mandaditos-5d7db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:980088209281:android:a72321a202044714c83280",
+        "android_client_info": {
+          "package_name": "com.ugb.miprimercalculadora"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "980088209281-dai1d043hul09knnt91ilbq0r1lvp4kq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSDAMNpL2svgFoJ6BG8LSENfi3FrinxPo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "980088209281-dai1d043hul09knnt91ilbq0r1lvp4kq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
