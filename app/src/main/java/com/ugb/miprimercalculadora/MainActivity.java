@@ -44,15 +44,13 @@ import java.util.ArrayList;
 import java.util.MissingFormatArgumentException;
 
 public class MainActivity extends AppCompatActivity {
-    Button btnGoogle;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btnGoogle.setOnClickListener(v -> {
 
-        });
 }
 
 
