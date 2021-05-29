@@ -28,7 +28,15 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.auth.GoogleAuthUtil;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.OAuthProvider;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -39,11 +47,25 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.AuthProvider;
 import java.security.Provider;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.MissingFormatArgumentException;
 
 public class MainActivity extends AppCompatActivity {
+    FirebaseAuth myFireBaseAuth;
+    FirebaseAuth.AuthStateListener mAuthListener;
+    public static final int RESQUEST_CODE = 98613;
+    Button btn;
+
+    //Lista de mis proveedores
+    List<AuthUI.IdpConfig> providers = Arrays.asList(
+            new AuthUI.IdpConfig.EmailBuilder().build(),
+            new AuthUI.IdpConfig.GoogleBuilder().build(),
+            new AuthUI.IdpConfig.FacebookBuilder().build());
+
 
 
     @Override
@@ -51,7 +73,54 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-}
+        //Creando la autentificaion
+        myFireBaseAuth = FirebaseAuth.getInstance();
 
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null){
+                    mensajeToast("Inicio correcto");
+                }else {
+                    startActivityForResult(AuthUI.getInstance()
+                    .createSignInIntentBuilder()
+                    .setAvailableProviders(providers)
+                    .setIsSmartLockEnabled(false)
+                    .build(), RESQUEST_CODE);
+                }
+            }
+        };
 
+        //Boton de cerrar sesion
+        btn = findViewById(R.id.btn_Sing_out);
+        btn.setOnClickListener(v -> {
+            AuthUI.getInstance().signOut(this).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    mensajeToast("Sesion cerrada");
+                    finish();
+
+                }
+            });
+        });
+
+    }//final Oncreate
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        myFireBaseAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        myFireBaseAuth.removeAuthStateListener(mAuthListener);
+    }
+
+    //Mensaje Toast en Pantalla
+    private void mensajeToast (String msg){
+        Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_LONG).show();
+    }
 }
