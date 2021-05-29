@@ -41,6 +41,9 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
+    // UI de firebase
+    implementation 'com.firebaseui:firebase-ui-auth:6.20.0'
+
     //FirebsaseBoom
     implementation platform('com.google.firebase:firebase-bom:27.1.0')
     //Firesbase
