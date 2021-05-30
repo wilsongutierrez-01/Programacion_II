@@ -6,5 +6,6 @@
     <string name="Correo">Ingresar Correo</string>
     <string name="Contra">Ingresar Contraseña</string>
     <string name="ContraVeri">Verificar Contraseña</string>
+    <string name="lblmandaditos">Bienvenidos a Mandaditos</string>
 
 </resources>
