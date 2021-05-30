@@ -11,21 +11,37 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/Correo"
-        android:inputType="textEmailAddress"/>
+        android:inputType="textEmailAddress"
+        android:layout_marginTop="390dp"
+        />
 
     <EditText
         android:id="@+id/txtContra"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="450dp"
         android:hint="@string/Contra"
-        android:inputType="textPassword"/>
+        android:inputType="textPassword"
+        />
 
     <Button
         android:id="@+id/btnIniciarSesion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/btnIniciar"
-        android:layout_marginTop="200dp"/>
+        android:layout_marginTop="550dp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/ic_resource_package"
+        />
 
 </RelativeLayout>
