@@ -14,8 +14,6 @@
         android:theme="@style/Theme.MiPrimerCalculadora"
         android:usesCleartextTraffic="true">
         <activity android:name=".Home"></activity>
-        <activity android:name=".Registrar" />
-        <activity android:name=".IniciarSesion" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
