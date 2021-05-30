@@ -7,11 +7,25 @@
     tools:context=".Home">
 
 
-<TextView
+    <TextView
     android:id="@+id/Bienvenida"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="Inicio Funciina bien xd"/>
+
+    <TextView
+        android:id="@+id/txtNombreH"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_marginTop="300dp"/>
+
+    <TextView
+        android:id="@+id/txtCorreoH"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Inicio Funciina bien xd"
+        android:layout_marginTop="350dp"/>
 
     <Button
         android:id="@+id/btnSalir"
