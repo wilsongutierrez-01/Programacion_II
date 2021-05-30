@@ -44,4 +44,11 @@
         android:background="@drawable/ic_resource_package"
         />
 
+    <Button
+        android:id="@+id/btnGoogle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Google"
+        android:layout_marginTop="300dp"/>
+
 </RelativeLayout>

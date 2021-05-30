@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 
 public class Registrar extends AppCompatActivity {
@@ -65,9 +66,14 @@ public class Registrar extends AppCompatActivity {
                                 startActivity(Inico);
                                // updateUI(user);
                             }else {
-                               // Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                Toast.makeText(getApplicationContext(), "Autentication failed.",Toast.LENGTH_LONG).show();
-                                //updateUI(null);
+                                if (task.getException() instanceof FirebaseAuthUserCollisionException){
+                                    Toast.makeText(getApplicationContext(), "El usuario ya existe", Toast.LENGTH_LONG).show();
+
+                                }else {
+                                    // Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                    Toast.makeText(getApplicationContext(), "Autentication failed.", Toast.LENGTH_LONG).show();
+                                    //updateUI(null);
+                                }
                             }
 
                         }
