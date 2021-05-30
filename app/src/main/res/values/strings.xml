@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Mandaditos</string>
-    <string name="facebook_application_id" translatable="false">2900456156904164</string>
-    <string name="facebook_login_protocol_schema" translatable="false">fb2900456156904164</string>
+
+    <string name="btnIniciar">Iniciar Sesion</string>
+    <string name="btnRegistrarse">Registrarse</string>
 
 </resources>

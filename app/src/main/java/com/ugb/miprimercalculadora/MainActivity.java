@@ -55,72 +55,14 @@ import java.util.List;
 import java.util.MissingFormatArgumentException;
 
 public class MainActivity extends AppCompatActivity {
-    FirebaseAuth myFireBaseAuth;
-    FirebaseAuth.AuthStateListener mAuthListener;
-    public static final int RESQUEST_CODE = 98613;
-    Button btn;
-
-    //Lista de mis proveedores
-    List<AuthUI.IdpConfig> providers = Arrays.asList(
-            new AuthUI.IdpConfig.EmailBuilder().build(),
-            new AuthUI.IdpConfig.GoogleBuilder().build(),
-            new AuthUI.IdpConfig.FacebookBuilder().build());
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Creando la autentificaion
-        myFireBaseAuth = FirebaseAuth.getInstance();
 
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null){
-                    mensajeToast("Inicio correcto");
-                }else {
-                    startActivityForResult(AuthUI.getInstance()
-                    .createSignInIntentBuilder()
-                    .setAvailableProviders(providers)
-                    .setIsSmartLockEnabled(false)
-                    .build(), RESQUEST_CODE);
-                }
-            }
-        };
-
-        //Boton de cerrar sesion
-        btn = findViewById(R.id.btn_Sing_out);
-        btn.setOnClickListener(v -> {
-            AuthUI.getInstance().signOut(this).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    mensajeToast("Sesion cerrada");
-                    finish();
-
-                }
-            });
-        });
-
-    }//final Oncreate
-
-    @Override
-    protected void onPostResume() {
-        super.onPostResume();
-        myFireBaseAuth.addAuthStateListener(mAuthListener);
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        myFireBaseAuth.removeAuthStateListener(mAuthListener);
-    }
 
-    //Mensaje Toast en Pantalla
-    private void mensajeToast (String msg){
-        Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_LONG).show();
-    }
 }
