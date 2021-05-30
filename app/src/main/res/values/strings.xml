@@ -3,5 +3,8 @@
 
     <string name="btnIniciar">Iniciar Sesion</string>
     <string name="btnRegistrarse">Registrarse</string>
+    <string name="Correo">Ingresar Correo</string>
+    <string name="Contra">Ingresar Contraseña</string>
+    <string name="ContraVeri">Verificar Contraseña</string>
 
 </resources>
