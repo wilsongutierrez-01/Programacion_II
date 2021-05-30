@@ -2,52 +2,49 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/contenidoView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/ic_pornico_foreground"
-    android:id="@+id/contenidoView"
+    android:layout_gravity="center"
+    android:background="@mipmap/ic_launcher_fonds"
     tools:context=".MainActivity">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/ic_resource_package"
-        />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/ic_resource_package" />
 
     <Button
         android:id="@+id/btnIniciar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btnIniciar"
-        android:layout_marginTop="400dp"
         android:layout_marginLeft="35dp"
-        />
+        android:layout_marginTop="400dp"
+        android:text="@string/btnIniciar" />
 
     <Button
         android:id="@+id/btnRegistrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btnRegistrarse"
-        android:layout_marginTop="400dp"
         android:layout_marginLeft="220dp"
-        />
+        android:layout_marginTop="400dp"
+        android:text="@string/btnRegistrarse" />
 
     <TextView
         android:id="@+id/lblmandaditos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:text="@string/lblmandaditos"
         android:textSize="30dp"
-        android:layout_centerHorizontal="true"
         android:textStyle="bold"
 
         />
-
 
 
 </RelativeLayout>

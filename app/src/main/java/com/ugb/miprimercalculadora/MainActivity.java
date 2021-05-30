@@ -57,10 +57,20 @@ import java.util.MissingFormatArgumentException;
 public class MainActivity extends AppCompatActivity {
     Button btn;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
+
+
+
+
+
+
         //Iniciar sesion
         btn = findViewById(R.id.btnIniciar);
         btn.setOnClickListener(v -> {
@@ -87,6 +97,8 @@ public class MainActivity extends AppCompatActivity {
         Intent Registrar = new Intent(this, Registrar.class);
         startActivity(Registrar);
     }
+
+
 
 
 }
