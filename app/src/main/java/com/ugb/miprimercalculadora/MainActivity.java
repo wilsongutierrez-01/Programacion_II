@@ -55,13 +55,37 @@ import java.util.List;
 import java.util.MissingFormatArgumentException;
 
 public class MainActivity extends AppCompatActivity {
+    Button btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //Iniciar sesion
+        btn = findViewById(R.id.btnIniciar);
+        btn.setOnClickListener(v -> {
+            IniciarSesion();
+        });
+
+        //Registrar
+        btn = findViewById(R.id.btnRegistrar);
+        btn.setOnClickListener(v -> {
+            Resgistrarse();
+        });
 
 
+    }
+
+    //iniciar Sesion
+    private void IniciarSesion(){
+        Intent iniciarSesion = new Intent(this, IniciarSesion.class);
+        startActivity(iniciarSesion);
+    }
+
+    //Registrar
+    private void Resgistrarse (){
+        Intent Registrar = new Intent(this, Registrar.class);
+        startActivity(Registrar);
     }
 
 
