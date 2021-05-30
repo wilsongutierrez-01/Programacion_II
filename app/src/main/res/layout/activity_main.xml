@@ -19,21 +19,6 @@
         android:layout_marginEnd="8dp"
         android:background="@drawable/ic_resource_package" />
 
-    <Button
-        android:id="@+id/btnIniciar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="400dp"
-        android:text="@string/btnIniciar" />
-
-    <Button
-        android:id="@+id/btnRegistrar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="220dp"
-        android:layout_marginTop="400dp"
-        android:text="@string/btnRegistrarse" />
 
     <TextView
         android:id="@+id/lblmandaditos"
@@ -44,5 +29,12 @@
         android:textSize="30dp"
         android:textStyle="bold"
         />
+
+    <Button
+        android:id="@+id/btnGoogle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Google"
+        android:layout_marginTop="300dp"/>
 
 </RelativeLayout>
