@@ -30,6 +30,60 @@
         android:textStyle="bold"
         />
 
+
+        <RadioButton
+            android:id="@+id/optFactorial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="!" />
+
+        <RadioButton
+            android:id="@+id/optPorcentaje"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="%" />
+        <RadioButton
+            android:id="@+id/optExponenciacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="^" />
+        <RadioButton
+            android:id="@+id/optRaizcuadrada"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="√" />
+        <RadioButton
+            android:id="@+id/optRaizCubica"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3√" />
+        <RadioButton
+            android:id="@+id/optRaizn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="n√" />
+        <RadioButton
+            android:id="@+id/optModulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="%mod" />
+        <RadioButton
+            android:id="@+id/optMayorde2numeros"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mayor" />
+    </RadioGroup>
+
+
+
+    <TextView
+        android:id="@+id/lblRespuesta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/optCalculadora"
+        android:text="Respuesta?"/>
+
+
     <Button
         android:id="@+id/btnGoogle"
         android:layout_width="wrap_content"
