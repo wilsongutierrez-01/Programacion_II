@@ -6,35 +6,67 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="@mipmap/ic_launcher_fonds"
-    tools:context=".MainActivity">
+    android:background="@color/browser_actions_divider_color"
+    tools:context=".MainActivity"
+    >
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_centerHorizontal="true"
         android:layout_marginStart="8dp"
         android:layout_marginTop="200dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/ic_resource_package" />
-
+        android:background="@drawable/ic_pornico_foreground"
+        />
 
     <TextView
         android:id="@+id/lblmandaditos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:text="@string/lblmandaditos"
-        android:textSize="30dp"
+        android:textSize="45dp"
         android:textStyle="bold"
+        android:layout_marginLeft="125dp"
+        android:layout_marginTop="230dp"
+        />
+
+    <TextView
+        android:id="@+id/lblinicarcon"
+        android:text="@string/lbliniciarcon"
+        android:textSize="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="550dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="125dp"
+        android:layout_marginTop="600dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/ic_google"
         />
 
     <Button
-        android:id="@+id/btnGoogle"
+        android:id="@+id/btnIniciar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Google"
-        android:layout_marginTop="300dp"/>
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="100dp"
+        android:text="@string/btnIniciar"
+        />
+
+    <Button
+        android:id="@+id/btnRegistrar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="220dp"
+        android:layout_marginTop="100dp"
+        android:text="@string/btnRegistrarse"
+        />
 
 </RelativeLayout>
