@@ -6,89 +6,66 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="@mipmap/ic_launcher_fonds"
-    tools:context=".MainActivity">
+    android:background="@color/browser_actions_divider_color"
+    tools:context=".MainActivity"
+    >
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_centerHorizontal="true"
         android:layout_marginStart="8dp"
         android:layout_marginTop="200dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/ic_resource_package" />
-
+        android:background="@drawable/ic_google"
+        />
 
     <TextView
         android:id="@+id/lblmandaditos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:text="@string/lblmandaditos"
+        android:textSize="45dp"
+        android:textStyle="bold"
+        android:layout_marginLeft="125dp"
+        android:layout_marginTop="230dp"
+        />
+
+    <TextView
+        android:id="@+id/lblinicarcon"
         android:text="@string/lblmandaditos"
         android:textSize="30dp"
-        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="550dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="125dp"
+        android:layout_marginTop="600dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/ic_google"
         />
 
 
-        <RadioButton
-            android:id="@+id/optFactorial"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="!" />
-
-        <RadioButton
-            android:id="@+id/optPorcentaje"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="%" />
-        <RadioButton
-            android:id="@+id/optExponenciacion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="^" />
-        <RadioButton
-            android:id="@+id/optRaizcuadrada"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="√" />
-        <RadioButton
-            android:id="@+id/optRaizCubica"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="3√" />
-        <RadioButton
-            android:id="@+id/optRaizn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="n√" />
-        <RadioButton
-            android:id="@+id/optModulo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="%mod" />
-        <RadioButton
-            android:id="@+id/optMayorde2numeros"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Mayor" />
-    </RadioGroup>
-
-
-
-    <TextView
-        android:id="@+id/lblRespuesta"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/optCalculadora"
-        android:text="Respuesta?"/>
-
 
     <Button
-        android:id="@+id/btnGoogle"
+        android:id="@+id/sign_in_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Google"
-        android:layout_marginTop="300dp"/>
+        android:text="Google"/>
+
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="30dp" />
 
 </RelativeLayout>
