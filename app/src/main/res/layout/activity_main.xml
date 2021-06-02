@@ -15,9 +15,9 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="220dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/ic_google"
+        android:background="@drawable/ic_resource_package"
         />
 
     <TextView
@@ -25,15 +25,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/lblmandaditos"
-        android:textSize="45dp"
+        android:textSize="38dp"
         android:textStyle="bold"
-        android:layout_marginLeft="125dp"
+        android:layout_marginLeft="135dp"
         android:layout_marginTop="230dp"
         />
 
     <TextView
         android:id="@+id/lblinicarcon"
-        android:text="@string/lblmandaditos"
+        android:text="@string/lbliniciarcon"
         android:textSize="30dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="550dp"
@@ -41,31 +41,23 @@
         android:layout_height="wrap_content"
         />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="125dp"
-        android:layout_marginTop="600dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/ic_google"
-        />
-
-
-
     <Button
         android:id="@+id/sign_in_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Google"/>
-
+        android:text="Google"
+        android:layout_marginTop="605dp"
+        android:layout_marginLeft="250dp"
+        />
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="30dp" />
+        android:layout_marginTop="615dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="50dp"
+        />
 
 </RelativeLayout>
