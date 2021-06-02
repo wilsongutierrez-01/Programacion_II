@@ -34,4 +34,25 @@
         android:text="Salir"
         android:layout_margin="100dp"/>
 
+
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="150dp"
+        app:cardCornerRadius="15dp">
+        <ImageView
+            android:id="@+id/imgPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"/>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+
+
 </RelativeLayout>
