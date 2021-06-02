@@ -106,12 +106,8 @@ public class MainActivity extends AppCompatActivity {
             public void onSuccess(LoginResult loginResult) {
                 Log.d(TAG, "onSucces" + loginResult);
                 handleFacebookToken(loginResult.getAccessToken());
-             
                 Intent home = new Intent(getApplicationContext(), Home.class);
-                  
-                  
-                  
-                  
+                startActivity(home);
 
             }
 
@@ -149,7 +145,6 @@ public class MainActivity extends AppCompatActivity {
 
     //Metodo SignIn
 
-
     private void signIn() {
         Intent signIntent = mGoogleSignClien.getSignInIntent();
         startActivityForResult(signIntent, RC_SING_In);
@@ -215,41 +210,11 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "handleFacebookToken" + token);
 
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
-
-
-    private void signIn() {
-        Intent signIntent = mGoogleSignClien.getSignInIntent();
-        startActivityForResult(signIntent, RC_SING_In);
-    }
-
-    //Activity Result
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        mCallbackManeger.onActivityResult(requestCode, resultCode, data);
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == RC_SING_In) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try {
-                GoogleSignInAccount account = task.getResult(ApiException.class);
-                firebaseAuthWithGoogle(account);
-
-            } catch (Exception e) {
-
-            }
-        }
-    }
-
-    //Metodo de FirabaseAuth para google
-    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
-
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-
                             Log.d(TAG, "signInWithCredential:successful");
                             FirebaseUser user = mAuth.getCurrentUser();
                             //updateUI(user);
@@ -261,59 +226,10 @@ public class MainActivity extends AppCompatActivity {
 
                         }
 
-
-                            // Sign in success, update UI with the signed-in user's information
-
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            Intent home = new Intent(getApplicationContext(), Home.class);
-                            startActivity(home);
-                            Toast.makeText(getApplicationContext(), "Bienvenido a Mandaditos", Toast.LENGTH_LONG).show();
-
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(getApplicationContext(), "Error de inicio", Toast.LENGTH_LONG).show();
-                        }
-
-                        // ...
-
                     }
                 });
     }
 
-    /*
-    Termina Inicar Sesion Google
-    *******************************************************************************************************************
-    ********************************************************************************************************************
-     */
-
-    /*
-    ******************************************************************************************************
-        Iniciar Sesion Facebook
-        ****************************************************************************************************
-        ******************************************************************************************************
-     */
-
-    private void handleFacebookToken(AccessToken token) {
-        Log.d(TAG, "handleFacebookToken" + token);
-
-        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Log.d(TAG, "signInWithCredential:successful");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            //updateUI(user);
-                        } else {
-                            Log.d(TAG, "signInWithCredential:failure");
-                            Toast.makeText(getApplicationContext(), "Error al iniciar", Toast.LENGTH_LONG);
-
-                        }
-
-                    }
-                });
-    }
 
 
        /*
@@ -323,13 +239,6 @@ public class MainActivity extends AppCompatActivity {
         ******************************************************************************************************
      */
 
-       /*
-    ******************************************************************************************************
-        Termina Iniciar Sesion Facebook
-        ****************************************************************************************************
-        ******************************************************************************************************
-     */
-  
     //OnStar para mantener sesion iniciada
     @Override
     public void onStart() {
@@ -344,5 +253,5 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-      
-   
+
+}
