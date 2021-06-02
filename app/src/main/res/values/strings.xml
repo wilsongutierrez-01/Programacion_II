@@ -8,6 +8,7 @@
     <string name="ContraVeri">Verificar Contraseña</string>
     <string name="lblmandaditos">Mandaditos</string>
     <string name="lbliniciarcon">Iniciar Sesion con:</string>
-
+    <string name="facebook_application_id" translatable="false">2900456156904164</string>
+    <string name="facebook_login_protocol_scheme">fb2900456156904164</string>
 
 </resources>

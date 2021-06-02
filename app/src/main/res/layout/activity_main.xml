@@ -17,7 +17,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="200dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/ic_pornico_foreground"
+        android:background="@drawable/ic_google"
         />
 
     <TextView
@@ -33,7 +33,7 @@
 
     <TextView
         android:id="@+id/lblinicarcon"
-        android:text="@string/lbliniciarcon"
+        android:text="@string/lblmandaditos"
         android:textSize="30dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="550dp"
@@ -51,22 +51,21 @@
         android:background="@drawable/ic_google"
         />
 
-    <Button
-        android:id="@+id/btnIniciar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="100dp"
-        android:text="@string/btnIniciar"
-        />
+
 
     <Button
-        android:id="@+id/btnRegistrar"
+        android:id="@+id/sign_in_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="220dp"
+        android:text="Google"/>
+
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="100dp"
-        android:text="@string/btnRegistrarse"
-        />
+        android:layout_marginBottom="30dp" />
 
 </RelativeLayout>
