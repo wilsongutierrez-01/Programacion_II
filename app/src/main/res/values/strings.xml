@@ -10,5 +10,9 @@
     <string name="lbliniciarcon">Iniciar Sesion con:</string>
     <string name="facebook_application_id" translatable="false">2900456156904164</string>
     <string name="facebook_login_protocol_scheme">fb2900456156904164</string>
+    <string name="lblmandaditos">Bienvenidos a Mandaditos</string>
+    <string name="facebook_application_id" translatable="false">1117359918766082</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">fb1117359918766082</string>
+
 
 </resources>
