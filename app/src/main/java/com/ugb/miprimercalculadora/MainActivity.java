@@ -128,8 +128,9 @@ public class MainActivity extends AppCompatActivity {
     //Activity Result
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        mCallbackManeger.onActivityResult(requestCode, resultCode, data);
+
         super.onActivityResult(requestCode, resultCode, data);
+        mCallbackManeger.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == RC_SING_In) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
