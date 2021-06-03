@@ -7,44 +7,32 @@
     android:background="#A3817C7B"
     tools:context=".Home">
 
-    <TextView
-        android:id="@+id/Bienvenida"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Inicio Funciina bien xd"/>
-
-    <TextView
-        android:id="@+id/txtNombreH"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:layout_marginTop="300dp"/>
-
-    <TextView
-        android:id="@+id/txtCorreoH"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Inicio Funciona bien xd"
-        android:layout_marginTop="350dp"/>
+    <Button
+        android:id="@+id/btnChat"
+        android:text="Chat"
+        android:layout_marginTop="575dp"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="275dp"
+        />
 
     <Button
-        android:id="@+id/btnSalir"
+        android:id="@+id/btnnuevo"
+        android:text="+"
+        android:layout_marginTop="575dp"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="150dp"
+        />
+
+    <Button
+        android:id="@+id/btnPerfil"
+        android:text=""
+        android:layout_marginTop="575dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Salir"
-        android:layout_margin="100dp"/>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="150dp"
-        app:cardCornerRadius="15dp">
-        <ImageView
-            android:id="@+id/imgPhoto"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"/>
-
-    </androidx.cardview.widget.CardView>
+        android:layout_marginLeft="25dp"
+        android:background="@drawable/ic_perfil"
+        />
 
 </RelativeLayout>
