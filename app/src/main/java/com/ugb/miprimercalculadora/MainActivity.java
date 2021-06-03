@@ -35,6 +35,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 public class MainActivity extends AppCompatActivity {
+
     //kikipornicoooo
     RelativeLayout relativeLayout;
 
@@ -47,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
     private final static String TAG = "FacebookAuthentication";
     private FirebaseAuth.AuthStateListener authStateListener;
     private Drawable Drawabled;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -240,8 +240,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(home);
         }
 
-
-
-
     }
+
 }

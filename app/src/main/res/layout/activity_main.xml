@@ -2,9 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@drawable/fondoooo"
     android:id="@+id/linearL"
     tools:context=".MainActivity"
@@ -54,6 +54,7 @@
         android:layout_marginBottom="30dp"
         android:layout_marginLeft="45dp"
         />
+
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in_button"
         android:layout_height="wrap_content"
