@@ -5,8 +5,8 @@
     android:id="@+id/contenidoView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
-    android:background="@color/browser_actions_divider_color"
+
+    android:background="@mipmap/fondoooo"
     tools:context=".MainActivity"
     >
 
@@ -16,8 +16,10 @@
         android:layout_height="120dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="100dp"
+
+
         android:layout_marginEnd="8dp"
-        android:background="@drawable/ic_resource_package"
+        android:background="@drawable/ic_cajaamarela_foreground"
         />
 
     <TextView
@@ -25,7 +27,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/lblmandaditos"
-        android:textSize="38dp"
+        android:textColor="@color/colorrojo"
+        android:textSize="38sp"
         android:textStyle="bold"
         android:layout_marginLeft="135dp"
         android:layout_marginTop="100dp"
@@ -34,15 +37,14 @@
     <TextView
         android:id="@+id/lblinicarcon"
         android:text="@string/lbliniciarcon"
-        android:textSize="30dp"
+        android:textSize="30sp"
+        android:textColor="@color/cardview_dark_background"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/lblmandaditos"
         android:layout_marginTop="100dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />
-
-
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
