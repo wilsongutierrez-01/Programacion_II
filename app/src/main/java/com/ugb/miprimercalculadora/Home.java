@@ -18,7 +18,6 @@ public class Home extends AppCompatActivity {
     private Button btn;
     private FirebaseAuth mAuth;
     private TextView nombre, correo;
-    Uri phto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +55,7 @@ public class Home extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
+        userinfo();
         //updateUI(currentUser);
     }
 
