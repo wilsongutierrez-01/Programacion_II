@@ -8,31 +8,32 @@
     tools:context=".Home">
 
     <Button
-        android:id="@+id/btnChat"
-        android:text="Chat"
+        android:id="@+id/btnPerfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
         android:layout_marginTop="575dp"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="275dp"
-        />
+        android:background="@drawable/ic_perfil"
+        android:text="" />
 
     <Button
-        android:id="@+id/btnnuevo"
-        android:text="+"
+        android:id="@+id/btnmas"
+        android:text=""
+        android:background="@drawable/ic_mas"
         android:layout_marginTop="575dp"
-        android:layout_width="100dp"
+        android:layout_width="85dp"
         android:layout_height="50dp"
         android:layout_marginLeft="150dp"
         />
 
     <Button
-        android:id="@+id/btnPerfil"
+        android:id="@+id/btnChat"
         android:text=""
+        android:background="@drawable/ic_chat"
         android:layout_marginTop="575dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
-        android:background="@drawable/ic_perfil"
+        android:layout_marginLeft="275dp"
         />
 
 </RelativeLayout>
