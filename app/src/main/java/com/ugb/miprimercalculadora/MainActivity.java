@@ -36,7 +36,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 public class MainActivity extends AppCompatActivity {
 
-    //kikipornicoooo
+
     RelativeLayout relativeLayout;
 
     Button btn;
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //kikipornicoooo
+
         relativeLayout=findViewById(R.id.linearL);
         Drawable d =getResources().getDrawable(R.drawable.fondoooo);
         relativeLayout.setBackground(d);
