@@ -125,7 +125,7 @@ public class Home extends AppCompatActivity {
                                 mensajeToast("NO se inserto el usuario en la base de datos de firebase");
                             }
                         } else{
-                            mensajeToast("NO pude obtener el identificar de tu telefono, por favor intentalo mas tarde.");
+                            mensajeToast("NO pude obtener el identificar de tu telefono, por favor intentalo mas tarde Por FAVOR.");
                         }
                     }catch (Exception ex){
                         mensajeToast(ex.getMessage());

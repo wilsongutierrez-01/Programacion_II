@@ -30,6 +30,7 @@
         android:theme="@style/Theme.MiPrimerCalculadora"
         android:usesCleartextTraffic="true">
         <activity android:name=".Profile"></activity>
+        <activity android:name=".lista_usuarios"></activity>
         <activity android:name=".Home" />
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -39,13 +40,7 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".lista_usuarios">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
 
 
 

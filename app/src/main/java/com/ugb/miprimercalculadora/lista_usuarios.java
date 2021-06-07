@@ -48,11 +48,9 @@ public class lista_usuarios extends AppCompatActivity {
                         try {
                             if (snapshot.getChildrenCount() <= 0) {
                                 mostrarMsgToast("No hay Usuario registrados...");
-                                registrarUsuarios();
                             }
                         } catch (Exception ex) {
                             mostrarMsgToast(ex.getMessage());
-                            registrarUsuarios();
                             finish();
                         }
                     }
@@ -97,7 +95,6 @@ public class lista_usuarios extends AppCompatActivity {
                 bundle.putString("user", datosJSONArray.getJSONObject(position).getString("user") );
                 bundle.putString("to", datosJSONArray.getJSONObject(position).getString("to") );
                 bundle.putString("from", datosJSONArray.getJSONObject(position).getString("from") );
-                bundle.putString("urlPhoto", datosJSONArray.getJSONObject(position).getString("urlPhoto") );
                 bundle.putString("urlPhotoFirestore", datosJSONArray.getJSONObject(position).getString("urlPhotoFirestore") );
                 Intent intent = new Intent(getApplicationContext(), chats.class);
                 intent.putExtras(bundle);
@@ -106,10 +103,6 @@ public class lista_usuarios extends AppCompatActivity {
                 mostrarMsgToast(ex.getMessage());
             }
         });
-    }
-    void registrarUsuarios(){
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(intent);
     }
     private void mostrarMsgToast(String msg){
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();

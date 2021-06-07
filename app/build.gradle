@@ -76,6 +76,9 @@ dependencies {
     //Error 129845 > 65536
     implementation 'androidx.multidex:multidex:2.0.1'
 
+    //Expreso Core
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
 
 
 }
