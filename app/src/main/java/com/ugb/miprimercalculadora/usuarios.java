@@ -1,16 +1,18 @@
 package com.ugb.miprimercalculadora;
 
+import android.net.Uri;
+
 public class usuarios {
-    String userName, email, urlPhoto, urlPhotoFirestore, token;
+    String userName, email,  token;
+    Uri  urlPhotoFirestore;
 
     public usuarios(){}
 
-    public usuarios(String userName, String email, String urlPhoto, String urlPhotoFirestore, String token) {
+    public usuarios(String userName, String email, String token, Uri urlPhotoFirestore) {
         this.userName = userName;
         this.email = email;
-        this.urlPhoto = urlPhoto;
-        this.urlPhotoFirestore = urlPhotoFirestore;
         this.token = token;
+        this.urlPhotoFirestore = urlPhotoFirestore;
     }
 
     public String getUserName() {
@@ -29,27 +31,19 @@ public class usuarios {
         this.email = email;
     }
 
-    public String getUrlPhoto() {
-        return urlPhoto;
-    }
-
-    public void setUrlPhoto(String urlPhoto) {
-        this.urlPhoto = urlPhoto;
-    }
-
-    public String getUrlPhotoFirestore() {
-        return urlPhotoFirestore;
-    }
-
-    public void setUrlPhotoFirestore(String urlPhotoFirestore) {
-        this.urlPhotoFirestore = urlPhotoFirestore;
-    }
-
     public String getToken() {
         return token;
     }
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public Uri getUrlPhotoFirestore() {
+        return urlPhotoFirestore;
+    }
+
+    public void setUrlPhotoFirestore(Uri urlPhotoFirestore) {
+        this.urlPhotoFirestore = urlPhotoFirestore;
     }
 }

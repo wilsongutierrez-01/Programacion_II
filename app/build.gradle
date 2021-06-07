@@ -11,6 +11,7 @@ android {
         applicationId "com.ugb.miprimercalculadora"
         minSdkVersion 19
         targetSdkVersion 30
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
 
@@ -71,6 +72,9 @@ dependencies {
     //FirebaseMesseging
     implementation 'com.google.firebase:firebase-inappmessaging-display'
     implementation 'com.google.firebase:firebase-analytics'
+
+    //Error 129845 > 65536
+    implementation 'androidx.multidex:multidex:2.0.1'
 
 
 

@@ -76,8 +76,7 @@ public class lista_usuarios extends AppCompatActivity {
                         datosJSONObject.put("user", user.getUserName());
                         datosJSONObject.put("to", user.getToken());
                         datosJSONObject.put("from", miToken);
-                        datosJSONObject.put("urlPhoto", user.getUrlPhoto());
-                        datosJSONObject.put("urlPhotoFirestore", user.getUrlPhoto());
+                        datosJSONObject.put("urlPhotoFirestore", user.getUrlPhotoFirestore());
                         datosJSONArray.put(datosJSONObject);
                     }
                     adaptadorImagenes adaptadorImagenes = new adaptadorImagenes(getApplicationContext(), stringArrayList);
