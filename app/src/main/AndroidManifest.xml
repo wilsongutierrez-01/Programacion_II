@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MiPrimerCalculadora">
-        <activity android:name=".agregarProducto"> </activity>
+        <activity android:name=".agregarAutomoviles"> </activity>
         <activity android:name=".MainActivity">
 
             <intent-filter>

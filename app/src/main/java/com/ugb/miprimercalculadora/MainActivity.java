@@ -1,7 +1,6 @@
 package com.ugb.miprimercalculadora;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -11,17 +10,11 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.ContextMenu;
-import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.RadioButton;
-import android.widget.RelativeLayout;
-import android.widget.Spinner;
-import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,12 +24,12 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     DB miDB;
-    Cursor datosProductosCursos = null;
+    Cursor datosAutosCursos = null;
     FloatingActionButton btn;
-    ListView ltsProductos;
-    ArrayList<productos> productosArrayList = new ArrayList<productos>();
-    ArrayList<productos> productosrrayListCopy = new ArrayList<productos>();
-    productos misProductos;
+    ListView ltsAutos;
+    ArrayList<automoviles> autosArrayList = new ArrayList<automoviles>();
+    ArrayList<automoviles> autosArrayListCopy = new ArrayList<automoviles>();
+    automoviles miAuto;
 
 
 
@@ -46,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        btn = findViewById(R.id.btnAgregarProductos);
+        btn = findViewById(R.id.btnAgregarAutos);
         try {
             comprobardatos();
         }catch (Exception e){
@@ -66,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater mymenu =getMenuInflater();
         mymenu.inflate(R.menu.menu,menu);
         AdapterView.AdapterContextMenuInfo mymenuInfo = (AdapterView.AdapterContextMenuInfo)menuInfo;
-        datosProductosCursos.moveToPosition(mymenuInfo.position);
-        menu.setHeaderTitle(datosProductosCursos.getString(1));
+        datosAutosCursos.moveToPosition(mymenuInfo.position);
+        menu.setHeaderTitle(datosAutosCursos.getString(1));
     }
 
     @Override
@@ -80,14 +73,13 @@ public class MainActivity extends AppCompatActivity {
 
                 case R.id.mnxmodificar:
                     String [] datos ={
-                            datosProductosCursos.getString(0),
-                            datosProductosCursos.getString(1),
-                            datosProductosCursos.getString(2),
-                            datosProductosCursos.getString(3),
-                            datosProductosCursos.getString(4),
-                            datosProductosCursos.getString(5),
-                            datosProductosCursos.getString(6),
-                            datosProductosCursos.getString(7),
+                            datosAutosCursos.getString(0),
+                            datosAutosCursos.getString(1),
+                            datosAutosCursos.getString(2),
+                            datosAutosCursos.getString(3),
+                            datosAutosCursos.getString(4),
+                            datosAutosCursos.getString(5),
+                            datosAutosCursos.getString(6),
 
                     };
                     agregarProductos("modificar",datos);
@@ -115,10 +107,10 @@ public class MainActivity extends AppCompatActivity {
         try {
             AlertDialog.Builder confirmacion = new AlertDialog.Builder(MainActivity.this);
             confirmacion.setTitle("¿Seguro desea eliminar?");
-            confirmacion.setMessage(datosProductosCursos.getString(2));
+            confirmacion.setMessage(datosAutosCursos.getString(1));
             confirmacion.setPositiveButton("SI", ((dialog, which) -> {
                 miDB = new DB (getApplicationContext(), "", null, 1);
-                datosProductosCursos =miDB.admin_productos("eliminar", new String[]{datosProductosCursos.getString(0)});
+                datosAutosCursos =miDB.admin_autos("eliminar", new String[]{datosAutosCursos.getString(0)});
                 comprobardatos();
                 mostrarMsgToast("Eliminado correcto");
                 dialog.dismiss();
@@ -136,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
     }
     //Buscar producto
     public void buscarProducto(){
-        TextView temp = findViewById(R.id.txtBuscarProductos);
+        TextView temp = findViewById(R.id.txtBuscarAutos);
         temp.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -145,28 +137,28 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                productosArrayList.clear();
+                autosArrayList.clear();
                 if (temp.getText().toString().length()<1){
-                    productosArrayList.addAll(productosrrayListCopy);
+                    autosArrayList.addAll(autosArrayListCopy);
                 }else{
-                    for (productos PB: productosrrayListCopy){
-                        String producto = PB.getProducto();
-                        String codigo = PB.getCodigo();
-                        String precio = PB.getPrecio();
+                    for (automoviles PB: autosArrayListCopy){
                         String marca = PB.getMarca();
-                        String presentacion = PB.getPresentacion();
+                        String modelo = PB.getModelo();
+                        String anio = PB.getAnio();
+                        String numeroMotor = PB.getNumeroMotor();
+                        String numeroChasis = PB.getNumeroChasis();
                         String buscando = temp.getText().toString().trim().toLowerCase();
-                        if (producto.toLowerCase().contains(buscando) ||
-                            codigo.toLowerCase().contains(buscando)   ||
-                            precio.toLowerCase().contains(buscando)   ||
-                            marca.toLowerCase().contains(buscando)    ||
-                            presentacion.toLowerCase().contains(buscando)){
-                            productosArrayList.add(PB);
+                        if (marca.toLowerCase().contains(buscando) ||
+                            modelo.toLowerCase().contains(buscando)   ||
+                            anio.toLowerCase().contains(buscando)   ||
+                            numeroMotor.toLowerCase().contains(buscando)    ||
+                            numeroChasis.toLowerCase().contains(buscando)){
+                            autosArrayList.add(PB);
                         }
                     }
                 }
-                adaptadorImagenes productoEncontrado = new adaptadorImagenes(getApplicationContext(), productosArrayList);
-                ltsProductos.setAdapter(productoEncontrado);
+                adaptadorImagenes autoEncontrado = new adaptadorImagenes(getApplicationContext(), autosArrayList);
+                ltsAutos.setAdapter(autoEncontrado);
             }
 
             @Override
@@ -183,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
             Bundle parametroProducto = new Bundle();
             parametroProducto.putString("accion",accion);
             parametroProducto.putStringArray("datos",datos);
-            Intent nuevoProducto = new Intent(getApplicationContext(), agregarProducto.class);
+            Intent nuevoProducto = new Intent(getApplicationContext(), agregarAutomoviles.class);
             nuevoProducto.putExtras(parametroProducto);
             startActivity(nuevoProducto);
         }catch (Exception e){
@@ -195,9 +187,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void comprobardatos() {
         miDB = new DB(getApplicationContext(),"",null,1);
-        datosProductosCursos = miDB.admin_productos("consultar",null);
+        datosAutosCursos = miDB.admin_autos("consultar",null);
 
-        if( datosProductosCursos.moveToFirst() ){
+        if( datosAutosCursos.moveToFirst() ){
             mostrarProductos();
 
 
@@ -208,30 +200,29 @@ public class MainActivity extends AppCompatActivity {
     }
     //mostrar productos
     private void mostrarProductos() {
-        ltsProductos = findViewById(R.id.ltsproducotos);
-        productosArrayList.clear();
-        productosrrayListCopy.clear();
+        ltsAutos = findViewById(R.id.ltsautos);
+        autosArrayList.clear();
+        autosArrayListCopy.clear();
 
         do{
-            misProductos = new productos(
-                    datosProductosCursos.getString(0),//idproducto
-                    datosProductosCursos.getString(1),//codigo
-                    datosProductosCursos.getString(2),//Producto
-                    datosProductosCursos.getString(3),//marca
-                    datosProductosCursos.getString(4),//descripcion
-                    datosProductosCursos.getString(5),//presentacion
-                    datosProductosCursos.getString(6), //precio
-                    datosProductosCursos.getString(7) //urldefoto
+            miAuto = new automoviles(
+                    datosAutosCursos.getString(0),//idauto
+                    datosAutosCursos.getString(1),//marca
+                    datosAutosCursos.getString(2),//modelo
+                    datosAutosCursos.getString(3),//año
+                    datosAutosCursos.getString(4),//numero de motor
+                    datosAutosCursos.getString(5),//numero de Chasis
+                    datosAutosCursos.getString(6) //urldefoto
             );
-            productosArrayList.add(misProductos);
-        }while(datosProductosCursos.moveToNext());
+            autosArrayList.add(miAuto);
+        }while(datosAutosCursos.moveToNext());
 
         try {
-            adaptadorImagenes adaptadorImagenes = new adaptadorImagenes(getApplicationContext(), productosArrayList);
-            ltsProductos.setAdapter(adaptadorImagenes);
+            adaptadorImagenes adaptadorImagenes = new adaptadorImagenes(getApplicationContext(), autosArrayList);
+            ltsAutos.setAdapter(adaptadorImagenes);
 
-            registerForContextMenu(ltsProductos);
-            productosrrayListCopy.addAll(productosArrayList);
+            registerForContextMenu(ltsAutos);
+            autosArrayListCopy.addAll(autosArrayList);
 
         }catch (Exception e){
             mostrarMsgToast(e.getMessage());
@@ -243,50 +234,31 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-class productos{
-    String idProducto;
-    String codigo;
-    String producto;
+class automoviles{
+    String idAuto;
     String marca;
-    String descripcion;
-    String presentacion;
-    String precio;
+    String modelo;
+    String anio;
+    String numeroMotor;
+    String numeroChasis;
     String urlPhoto;
 
-
-    public productos(String idProducto, String codigo, String producto, String marca, String descripcion, String presentacion, String precio, String urlPhoto) {
-        this.idProducto = idProducto;
-        this.codigo = codigo;
-        this.producto = producto;
+    public automoviles(String idAuto, String marca, String modelo, String anio, String numeroMotor, String numeroChasis, String urlPhoto) {
+        this.idAuto = idAuto;
         this.marca = marca;
-        this.descripcion = descripcion;
-        this.presentacion = presentacion;
-        this.precio = precio;
+        this.modelo = modelo;
+        this.anio = anio;
+        this.numeroMotor = numeroMotor;
+        this.numeroChasis = numeroChasis;
         this.urlPhoto = urlPhoto;
     }
 
-    public String getIdProducto() {
-        return idProducto;
+    public String getIdAuto() {
+        return idAuto;
     }
 
-    public void setIdProducto(String idProducto) {
-        this.idProducto = idProducto;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
-    public String getProducto() {
-        return producto;
-    }
-
-    public void setProducto(String producto) {
-        this.producto = producto;
+    public void setIdAuto(String idAuto) {
+        this.idAuto = idAuto;
     }
 
     public String getMarca() {
@@ -297,28 +269,36 @@ class productos{
         this.marca = marca;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getModelo() {
+        return modelo;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
     }
 
-    public String getPresentacion() {
-        return presentacion;
+    public String getAnio() {
+        return anio;
     }
 
-    public void setPresentacion(String presentacion) {
-        this.presentacion = presentacion;
+    public void setAnio(String anio) {
+        this.anio = anio;
     }
 
-    public String getPrecio() {
-        return precio;
+    public String getNumeroMotor() {
+        return numeroMotor;
     }
 
-    public void setPrecio(String precio) {
-        this.precio = precio;
+    public void setNumeroMotor(String numeroMotor) {
+        this.numeroMotor = numeroMotor;
+    }
+
+    public String getNumeroChasis() {
+        return numeroChasis;
+    }
+
+    public void setNumeroChasis(String numeroChasis) {
+        this.numeroChasis = numeroChasis;
     }
 
     public String getUrlPhoto() {
